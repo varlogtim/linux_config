@@ -1,6 +1,8 @@
 ! special
-*.foreground:   #c5c8c6
-*.background:   #1d1f21
+!*.foreground:   #c5c8c6
+*.foreground:   #cccfcd
+!*.background:   #1d1f21
+*.background:   #000000
 *.cursorColor:  #c5c8c6
 
 ! black
@@ -45,6 +47,7 @@ Xft.antialias: 1
 Xft.rgba: rgb
 
 ! Urxvt
+! required 'pacman -S ttf-anonymous-pro'
 URxvt.font: xft:Anonymous Pro:size=10
 URxvt.depth: 32
 URxvt*scrollBar: false
