@@ -10,16 +10,26 @@ set hlsearch
 syntax on
 
 " Color scheme
-colorscheme peachpuff
+colorscheme jellybeans
 highlight Search ctermfg=black ctermbg=darkyellow
 
+set background=dark
 
 " Make comments italic
 highlight Comment cterm=italic
 
+" Command Mapping
+"
+command Rc source ~/.vimrc
+
+" Command Abbreviations
+"
+cnoreabbrev Cs colorscheme
+
 
 " Vim Pluggins vim-plug
 call plug#begin('~/.vim/plugged')
+
 
 " PEP8 Python Comliance
 Plug 'Vimjas/vim-python-pep8-indent'
@@ -29,6 +39,8 @@ Plug 'leafgarland/typescript-vim'
 
 " You Complete Me
 Plug 'Valloric/YouCompleteMe'
+Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
+let g:ycm_confirm_extra_conf = 0
 
 " ALE - Linting
 Plug 'w0rp/ale'
@@ -45,8 +57,8 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
 " Rtags - not setup yet
-" Plug 'lyuts/vim-rtags'
-" let g:rtagsRcCmd = "/home/ttucker/path/to/rtags/build/bin/rc"
+Plug 'lyuts/vim-rtags'
+let g:rtagsRcCmd = "/usr/local/bin/rc"
 
 
 call plug#end() 
