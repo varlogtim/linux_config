@@ -19,11 +19,9 @@ set background=dark
 highlight Comment cterm=italic
 
 " Command Mapping
-"
 command Rc source ~/.vimrc
 
 " Command Abbreviations
-"
 cnoreabbrev Cs colorscheme
 
 
@@ -56,9 +54,11 @@ let g:ale_linters = {
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
-" Rtags - not setup yet
+" Rtags
 Plug 'lyuts/vim-rtags'
 let g:rtagsRcCmd = "/usr/local/bin/rc"
 
+" Commentary
+Plug 'tpope/vim-commentary'
 
 call plug#end() 
