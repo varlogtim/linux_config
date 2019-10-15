@@ -48,7 +48,7 @@ Xft.rgba: rgb
 
 ! Urxvt
 ! required 'pacman -S ttf-anonymous-pro'
-URxvt.font: xft:Anonymous Pro:size=10
+URxvt.font: xft:Anonymous Pro:size=11
 URxvt.depth: 32
 URxvt*scrollBar: false
 URxvt*mouseWheelScrollPage: false
