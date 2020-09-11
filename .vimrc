@@ -54,6 +54,10 @@ let g:ale_linters = {
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
+" FZF
+Plug 'junegunn/fzf'
+Plug 'junegunn/fzf.vim'
+
 " Rtags
 Plug 'lyuts/vim-rtags'
 let g:rtagsRcCmd = "/usr/local/bin/rc"
@@ -62,3 +66,7 @@ let g:rtagsRcCmd = "/usr/local/bin/rc"
 Plug 'tpope/vim-commentary'
 
 call plug#end() 
+
+
+" FZF Settings
+nmap <c-p> :FZF<CR>
