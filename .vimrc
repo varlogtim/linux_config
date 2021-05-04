@@ -9,14 +9,8 @@ set hlsearch
 " Enable color syntax highlighting
 syntax on
 
-" Color scheme
-colorscheme jellybeans
-highlight Search ctermfg=black ctermbg=darkyellow
-
-set background=dark
-
 " Make comments italic
-highlight Comment cterm=italic
+"highlight Comment cterm=italic
 
 " Command Mapping
 command Rc source ~/.vimrc
@@ -28,12 +22,17 @@ cnoreabbrev Cs colorscheme
 " Vim Pluggins vim-plug
 call plug#begin('~/.vim/plugged')
 
+" Color Schemes
+Plug 'altercation/vim-colors-solarized'
 
 " PEP8 Python Comliance
 Plug 'Vimjas/vim-python-pep8-indent'
 
 " Type Script
 Plug 'leafgarland/typescript-vim'
+
+" Javascript
+Plug 'pangloss/vim-javascript'
 
 " You Complete Me
 Plug 'Valloric/YouCompleteMe'
@@ -65,7 +64,27 @@ let g:rtagsRcCmd = "/usr/local/bin/rc"
 " Commentary
 Plug 'tpope/vim-commentary'
 
+" Clang auto-formatting
+"Plug 'cjuniet/clang-format.vim'
+Plug 'rhysd/vim-clang-format'
+let g:clang_format#auto_format=0
+
 call plug#end() 
+
+"let g:airline_theme = 'codedark'
+
+
+
+" Colorschemes
+" Solarized:
+colorscheme solarized
+let g:solarized_termcolors=256
+
+" Jellybeans
+" colorscheme jellybeans
+" highlight Search ctermfg=black ctermbg=darkyellow
+
+set background=dark
 
 
 " FZF Settings
