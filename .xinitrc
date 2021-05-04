@@ -12,5 +12,5 @@ if [ -f "$usermodmap" ]; then
     xmodmap "$usermodmap"
 fi
 
-exec copyq
+# exec copyq
 exec awesome
