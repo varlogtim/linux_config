@@ -7,17 +7,25 @@ Rtags:
 
 
 AwesomeWM:
+ - Remove titles from windows. I don't need this.
+ - Change themes to use the Solarized colors.
  - Add battery level to status bar
   - Also, should record battery levels, possibly in rrd, and use it to determine charge/discharge rate.
  - Add IP addresses to status bar
 
-
-Sound:
- - Get sound to work.
- - See if plugging in headphones will switch audio device as expected?
- - See if a TRRS mic+headphones will work
-
+Xresources:
+ - Look into changing command line colours to Solarized.
 
 Vim:
  - Yank to clipboard? Is this possible?
  
+
+FINISHED!!:
+
+Sound:
+ - Get sound to work.
+ - See if plugging in headphones will switch audio device as expected?
+  - Yes, it will. DONE!
+ - See if a TRRS mic+headphones will work: DONE
+
+
