@@ -18,6 +18,12 @@ Xresources:
 
 Vim:
  - Yank to clipboard? Is this possible?
+
+Git:
+ - *** figure out how to adjust the colors for git diff.
+    - The "unmodified" color is bold
+    - The "added" color is dark.
+    - ^ Need to figure out how to flip these.
  
 
 FINISHED!!:

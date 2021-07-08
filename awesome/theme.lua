@@ -10,25 +10,65 @@ local gfs = require("gears.filesystem")
 local themes_path = gfs.get_themes_dir()
 local theme_dir = "/home/ttucker/thinkpad/awesome/theme/"
 
+local solarized = {}
+
+solarized.base03    = "#002b36"
+solarized.base02    = "#073642"
+solarized.base01    = "#586e75"
+solarized.base00    = "#657b83"
+solarized.base0     = "#839496"
+solarized.base1     = "#93a1a1"
+solarized.base2     = "#eee8d5"
+solarized.base3     = "#fdf6e3"
+solarized.yellow    = "#b58900"
+solarized.orange    = "#cb4b16"
+solarized.red       = "#dc322f"
+solarized.magenta   = "#d33682"
+solarized.violet    = "#6c71c4"
+solarized.blue      = "#268bd2"
+solarized.cyan      = "#2aa198"
+solarized.green     = "#859900"
+
+solarized.term = {}
+solarized.term.green    = "#5f8700"
+solarized.term.cyan     = "#00afaf"
+solarized.term.blue     = "#0087ff"
+solarized.term.brmagenta= "#5f5faf"
+solarized.term.magenta  = "#af005f"
+solarized.term.red      = "#d70000"
+solarized.term.brred    = "#d75f00"
+solarized.term.yellow   = "#af8700"
+-- Grays:
+solarized.term.brwhite  = "#ffffd7"
+solarized.term.white    = "#d7d7af"
+solarized.term.brcyan   = "#8a8a8a"
+solarized.term.brblue   = "#808080"
+solarized.term.bryellow = "#585858"
+solarized.term.brgreen  = "#4e4e4e"
+solarized.term.black    = "#262626"
+solarized.term.brblack  = "#1c1c1c"
+
 local theme = {}
 
 theme.font          = "Anonymous Pro 10"
 
-theme.bg_normal     = "#222222"
-theme.bg_focus      = "#373b41"
-theme.bg_urgent     = "#ff0000"
-theme.bg_minimize   = "#444444"
-theme.bg_systray    = theme.bg_normal
+theme.bg_normal     = solarized.term.brblack
+theme.bg_focus      = solarized.term.black
+theme.bg_urgent     = solarized.term.bryellow
+theme.bg_minimize   = solarized.term.brgreen
+theme.bg_systray    = solarized.term.brgreen
 
-theme.fg_normal     = "#707880"
-theme.fg_focus      = "#c5c8c6"
-theme.fg_urgent     = "#c5c8c6"
+theme.fg_normal     = solarized.term.brgreen
+theme.fg_focus      = solarized.term.brcyan
+theme.fg_urgent     = solarized.violet
 theme.fg_minimize   = "#c5c8c6"
 
 theme.useless_gap   = dpi(0)
-theme.border_width  = dpi(1)
-theme.border_normal = "#000000"
-theme.border_focus  = "#373b41"
+theme.border_width  = dpi(0.5)
+--theme.border_normal = "#000000"
+theme.border_normal = solarized.term.black
+--theme.border_focus  = "#373b41"
+theme.border_focus  = solarized.term.bryellow
 theme.border_marked = "#cc6666"
 
 -- There are other variable sets
@@ -47,8 +87,14 @@ theme.taglist_bg_focus = "#282a2e"
 theme.tasklist_bg_focus = "#282a2e"
 theme.tasklist_bg_normal = "#222222"
 
+-- XXX Work more on these colors later:
+theme.taglist_bg_focus = solarized.term.brgreen
+theme.taglist_fg_focus = solarized.orange
+theme.tasklist_bg_focus = solarized.brblack
+theme.tasklist_bg_normal = solarized.black
+
 -- Generate taglist squares:
-local taglist_square_size = dpi(4)
+local taglist_square_size = dpi(6)
 theme.taglist_squares_sel = theme_assets.taglist_squares_sel(
     taglist_square_size, theme.fg_normal
 )
