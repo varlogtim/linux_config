@@ -67,7 +67,7 @@ Plug 'tpope/vim-commentary'
 " Clang auto-formatting
 "Plug 'cjuniet/clang-format.vim'
 Plug 'rhysd/vim-clang-format'
-let g:clang_format#auto_format=0
+" let g:clang_format#auto_format=1
 
 call plug#end() 
 
@@ -79,6 +79,9 @@ call plug#end()
 " Solarized:
 colorscheme solarized
 let g:solarized_termcolors=256
+let g:solarized_termtrans=1
+let g:solarized_visibity="high"
+let g:solarized_contrast="high"
 
 " Jellybeans
 " colorscheme jellybeans
@@ -89,3 +92,7 @@ set background=dark
 
 " FZF Settings
 nmap <c-p> :FZF<CR>
+
+
+" ctags:
+set tags="~/.cache/ctags"
