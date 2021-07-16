@@ -26,6 +26,9 @@ for rc in $HOME/.config/.*.bashrc; do
     source $rc
 done
 
+# Android
+export ANDROID_SDK_ROOT=$HOME/Android/Sdk/
+
 # Paths
 export PATH=$HOME/bin:$PATH
 export PATH=$HOME/go/bin:$PATH
@@ -40,7 +43,9 @@ if [ -f '/home/ttucker/tmp/src/google-cloud-sdk/completion.bash.inc' ]; then . '
 eval "$(pyenv init -)"
 
 
-# Determined
+# Determined - XXX Move to additional bashrcs
 alias entdet='source $HOME/.virtualenvs/determined/bin/activate' 
 alias gdet='source $HOME/determined/det/bin/activate'
 
+# A better git log
+#git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
