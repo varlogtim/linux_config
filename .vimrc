@@ -69,10 +69,16 @@ Plug 'tpope/vim-commentary'
 Plug 'rhysd/vim-clang-format'
 " let g:clang_format#auto_format=1
 
+" Auto-formatting for Python
+"Plug 'python/black'
+
+" Tag Browser
+Plug 'majutsushi/tagbar', { 'on': 'Tagbar' }  " browse symbols
+
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+
+
 call plug#end() 
-
-"let g:airline_theme = 'codedark'
-
 
 
 " Colorschemes
@@ -83,16 +89,17 @@ let g:solarized_termtrans=1
 let g:solarized_visibity="high"
 let g:solarized_contrast="high"
 
-" Jellybeans
-" colorscheme jellybeans
-" highlight Search ctermfg=black ctermbg=darkyellow
-
 set background=dark
+
+
+let g:black_linelength = 100
 
 
 " FZF Settings
 nmap <c-p> :FZF<CR>
 
+" Tag Jumping and Popping
+nmap <c-i> :GoDecls<CR>
 
 " ctags:
 set tags="~/.cache/ctags"
