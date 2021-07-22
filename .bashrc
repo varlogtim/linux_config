@@ -12,6 +12,12 @@ alias rm='rm -iv'
 alias make='make'  # use 8 jobs
 alias ct='ctags -R -o ~/.cache/ctags ./'
 
+# Functions
+FUNC_DIR=$HOME/thinkpad/tools/bash_funcs
+for f in $FUNC_DIR/*; do
+    source $f
+done
+
 # Variables
 export CSCOPE_EDITOR=/usr/bin/vim
 
@@ -49,3 +55,8 @@ alias gdet='source $HOME/determined/det/bin/activate'
 
 # A better git log
 #git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+
+# NVM
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
