@@ -61,6 +61,9 @@ Plug 'junegunn/fzf.vim'
 Plug 'lyuts/vim-rtags'
 let g:rtagsRcCmd = "/usr/local/bin/rc"
 
+" Ctags
+Plug 'universal-ctags/ctags'
+
 " Commentary
 Plug 'tpope/vim-commentary'
 
@@ -80,6 +83,8 @@ Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
 call plug#end() 
 
+" Yaml
+autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 
 " Colorschemes
 " Solarized:
@@ -102,4 +107,7 @@ nmap <c-p> :FZF<CR>
 nmap <c-i> :GoDecls<CR>
 
 " ctags:
-set tags="~/.cache/ctags"
+set tags=$HOME/ctags
+" Fix with <C-j> :ts<CR>
+nnoremap <C-j> <C-]>
+nnoremap <C-b> <C-t>
