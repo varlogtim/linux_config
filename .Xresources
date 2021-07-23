@@ -11,31 +11,34 @@
 
 ! red
 *.color9:       #d70000
-*.color1:       #d75f00
+! *.color1:       #d75f00
+*.color1:       #a34900
 
 ! green
-*.color10:       #5f8700
-*.color2:      #4e4e4e
+*.color10:      #5f8700
+! *.color2:       #4e4e4e
+*.color2:       #4d6e00
 
 ! yellow
-*.color11:       #af8700
-*.color3:      #585858
+*.color11:      #af8700
+*.color3:       #585858
 
 ! blue
-*.color12:       #0087ff
-*.color4:      #808080
+*.color12:      #0087ff
+*.color4:       #808080
+! *.color4:       #8f8080
 
 ! magenta
-*.color13:       #af005f
-*.color5:      #5f5faf
+*.color13:      #af005f
+*.color5:       #5f5faf
 
 ! cyan
-*.color14:       #00afaf
-*.color6:      #8a8a8a
+*.color14:      #00afaf
+*.color6:       #8a8a8a
 
 ! white
-*.color15:       #d7d7af
-*.color7:      #ffffd7
+*.color15:      #d7d7af
+*.color7:       #ffffd7
 
 ! Xft
 Xft.dpi: 144
@@ -47,7 +50,7 @@ Xft.rgba: rgb
 
 ! Urxvt
 ! required 'pacman -S ttf-anonymous-pro'
-URxvt.font: xft:Anonymous Pro:size=13
+URxvt.font: xft:Anonymous Pro:size=11
 URxvt.depth: 32
 URxvt*scrollBar: false
 URxvt*mouseWheelScrollPage: false
@@ -89,3 +92,6 @@ URxvt.keysym.M-u: perl:url-select:select_next
 !! URxvt.url-select.launcher: /usr/bin/xdg-open
 URxvt.url-select.launcher: chromium
 URxvt.url-select.underline: true
+
+
+URxvt*skipBuiltinGlyphs:    true

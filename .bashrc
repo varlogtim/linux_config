@@ -1,16 +1,21 @@
 # PyEnv
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init --path)"
+# export PYENV_ROOT="$HOME/.pyenv"
+# export PATH="$PYENV_ROOT/bin:$PATH"
+# eval "$(pyenv init --path)"
 
 # Aliases
 alias ls='ls --color=always'
 alias grep='grep --color=always'
+alias grepc='grep --color=never'
 alias cp='cp -v'
 alias mv='mv -v'
 alias rm='rm -iv'
+alias less='less -R'
 alias make='make'  # use 8 jobs
 alias ct='ctags -R -o ~/.cache/ctags ./'
+alias xc='xclip'
+alias purgeDevDb='docker kill determined_db; docker container rm determined_db'
+alias ca='conda activate'
 
 # Functions
 FUNC_DIR=$HOME/thinkpad/tools/bash_funcs
@@ -38,6 +43,8 @@ export ANDROID_SDK_ROOT=$HOME/Android/Sdk/
 # Paths
 export PATH=$HOME/bin:$PATH
 export PATH=$HOME/go/bin:$PATH
+export PATH=/usr/lib/jvm/java-11-openjdk/bin/:$PATH
+export PATH=$HOME/.local/bin:$PATH
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/home/ttucker/tmp/src/google-cloud-sdk/path.bash.inc' ]; then . '/home/ttucker/tmp/src/google-cloud-sdk/path.bash.inc'; fi
@@ -45,13 +52,7 @@ if [ -f '/home/ttucker/tmp/src/google-cloud-sdk/path.bash.inc' ]; then . '/home/
 # The next line enables shell command completion for gcloud.
 if [ -f '/home/ttucker/tmp/src/google-cloud-sdk/completion.bash.inc' ]; then . '/home/ttucker/tmp/src/google-cloud-sdk/completion.bash.inc'; fi
 
-# PyEnv init
-eval "$(pyenv init -)"
-
-
-# Determined - XXX Move to additional bashrcs
-alias entdet='source $HOME/.virtualenvs/determined/bin/activate' 
-alias gdet='source $HOME/determined/det/bin/activate'
+export TZ='America/New_York';
 
 # A better git log
 #git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
@@ -60,3 +61,19 @@ alias gdet='source $HOME/determined/det/bin/activate'
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/ttucker/miniconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/ttucker/miniconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/ttucker/miniconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/ttucker/miniconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
