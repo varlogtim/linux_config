@@ -23,8 +23,8 @@ local battery_widget = require("battery-widget")
 local MON_BAT0 = battery_widget {
     ac = "AC",
     adapter = "BAT0",
-    ac_prefix = "ac:",
-    battery_prefix = "bat:",
+    ac_prefix = "AC:",
+    battery_prefix = "BAT:",
     percent_colors = {
         { 25, "red"   },
         { 50, "orange"},
@@ -34,7 +34,8 @@ local MON_BAT0 = battery_widget {
     timeout = 10,
     widget_text = "${AC_BAT}${color_on}${percent}%${color_off}",
     -- widget_font = "Deja Vu Sans Mono 10",
-    widget_font = "Anonymous Pro 10",
+    -- widget_font = "Anonymous Pro 10",
+    widget_font = "Terminus 9",
     tooltip_text = "Battery ${state}${time_est}\nCapacity: ${capacity_percent}%",
     alert_threshold = 5,
     alert_timeout = 0,
