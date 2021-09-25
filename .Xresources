@@ -6,69 +6,57 @@
 *.cursorColor:  #eee8d5
 
 ! black
-*.color8:       #575757
-*.color0:       #3c3c3c
+*.color8:       #262626
+*.color0:       #1c1c1c
 
 ! red
-! HSV: 000d, 100%, 84%
 *.color9:       #d70000
-! HSV: 000d, 100%, 54%
-*.color1:       #8a0000
+! *.color1:       #d75f00
+*.color1:       #a34900
 
 ! green
-! HSV: 078d, 100%, 53%
 *.color10:      #5f8700
-! HSV: 078d, 100%, 43%
+! *.color2:       #4e4e4e
 *.color2:       #4d6e00
 
 ! yellow
-! HSV: 046d, 100%, 69%
 *.color11:      #af8700
-! HSV: 046d, 100%, 49%
-*.color3:       #7d6000
+*.color3:       #585858
 
 ! blue
-! HSV: 208d, 100%, 100%
 *.color12:      #0087ff
-! HSV: 208d, 100%, 70%
-*.color4:       #005fb3
+*.color4:       #808080
+! *.color4:       #8f8080
 
 ! magenta
 *.color13:      #af005f
-*.color5:       #7d0045
+*.color5:       #5f5faf
 
 ! cyan
 *.color14:      #00afaf
-*.color6:       #007d7d
+*.color6:       #8a8a8a
 
 ! white
 *.color15:      #d7d7af
 *.color7:       #ffffd7
 
 ! Xft
-!Xft.dpi: 144
-Xft.dpi: 152
+Xft.dpi: 144
 Xft.autohint: 0
-! Xft.hintstyle: hintfull
-! Xft.hinting: 1
-! Xft.antialias: 1
-Xft.rgba: rgba 
+Xft.hintstyle: hintfull
+Xft.hinting: 1
+Xft.antialias: 1
+Xft.rgba: rgb
 
 ! Urxvt
+! required 'pacman -S ttf-anonymous-pro'
+URxvt.font: xft:Anonymous Pro:size=11
 URxvt.depth: 32
 URxvt*scrollBar: false
 URxvt*mouseWheelScrollPage: false
 URxvt*cursorBlink: true
 URxvt*saveLines: 10000
 URxvt*internalBorder: 2
-
-! Font
-! required 'pacman -S ttf-anonymous-pro'
-! URxvt.font: xft:Anonymous Pro:size=11
-URxvt.letterSpace: 1.2
-URxvt.lineSpace: 0
-
-URxvt.font: xft:Terminus:pixelsize=24
 URxvt.letterSpace: 0
 URxvt.lineSpace: 0
 
