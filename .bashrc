@@ -16,6 +16,7 @@ alias ct='ctags -R -o ~/.cache/ctags ./'
 alias xc='xclip'
 alias purgeDevDb='docker kill determined_db; docker container rm determined_db'
 alias ca='conda activate'
+alias cad='conda activate dev'
 
 # Functions
 FUNC_DIR=$HOME/thinkpad/tools/bash_funcs
@@ -37,8 +38,7 @@ for rc in $HOME/.config/.*.bashrc; do
     source $rc
 done
 
-# Android
-export ANDROID_SDK_ROOT=$HOME/Android/Sdk/
+export TERMINFO="/usr/share/terminfo"
 
 # Paths
 export PATH=$HOME/bin:$PATH
@@ -61,6 +61,7 @@ export TZ='America/New_York';
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
