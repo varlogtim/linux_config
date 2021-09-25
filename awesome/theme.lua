@@ -50,7 +50,8 @@ solarized.term.brblack  = "#1c1c1c"
 
 local theme = {}
 
-theme.font          = "Anonymous Pro 10"
+-- theme.font          = "Anonymous Pro 10"
+theme.font          = "Terminus 9"
 
 theme.bg_normal     = solarized.term.brblack
 theme.bg_focus      = solarized.term.black
@@ -63,8 +64,8 @@ theme.fg_focus      = solarized.term.brcyan
 theme.fg_urgent     = solarized.violet
 theme.fg_minimize   = "#c5c8c6"
 
-theme.useless_gap   = dpi(0)
-theme.border_width  = dpi(0.5)
+theme.useless_gap   = 0 -- dpi(1.0)
+theme.border_width  = 1 -- dpi(0.4)
 --theme.border_normal = "#000000"
 theme.border_normal = solarized.term.black
 --theme.border_focus  = "#373b41"
@@ -94,7 +95,7 @@ theme.tasklist_bg_focus = solarized.brblack
 theme.tasklist_bg_normal = solarized.black
 
 -- Generate taglist squares:
-local taglist_square_size = dpi(6)
+local taglist_square_size = dpi(4)
 theme.taglist_squares_sel = theme_assets.taglist_squares_sel(
     taglist_square_size, theme.fg_normal
 )
