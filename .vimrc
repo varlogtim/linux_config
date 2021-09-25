@@ -9,14 +9,8 @@ set hlsearch
 " Enable color syntax highlighting
 syntax on
 
-" Color scheme
-colorscheme jellybeans
-highlight Search ctermfg=black ctermbg=darkyellow
-
-set background=dark
-
 " Make comments italic
-highlight Comment cterm=italic
+"highlight Comment cterm=italic
 
 " Command Mapping
 command Rc source ~/.vimrc
@@ -28,12 +22,17 @@ cnoreabbrev Cs colorscheme
 " Vim Pluggins vim-plug
 call plug#begin('~/.vim/plugged')
 
+" Color Schemes
+Plug 'altercation/vim-colors-solarized'
 
 " PEP8 Python Comliance
 Plug 'Vimjas/vim-python-pep8-indent'
 
 " Type Script
 Plug 'leafgarland/typescript-vim'
+
+" Javascript
+Plug 'pangloss/vim-javascript'
 
 " You Complete Me
 Plug 'Valloric/YouCompleteMe'
@@ -54,11 +53,61 @@ let g:ale_linters = {
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
+" FZF
+Plug 'junegunn/fzf'
+Plug 'junegunn/fzf.vim'
+
 " Rtags
 Plug 'lyuts/vim-rtags'
 let g:rtagsRcCmd = "/usr/local/bin/rc"
 
+" Ctags
+Plug 'universal-ctags/ctags'
+
 " Commentary
 Plug 'tpope/vim-commentary'
 
+" Clang auto-formatting
+"Plug 'cjuniet/clang-format.vim'
+Plug 'rhysd/vim-clang-format'
+" let g:clang_format#auto_format=1
+
+" Auto-formatting for Python
+"Plug 'python/black'
+
+" Tag Browser
+Plug 'majutsushi/tagbar', { 'on': 'Tagbar' }  " browse symbols
+
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+
+
 call plug#end() 
+
+" Yaml
+autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
+
+" Colorschemes
+" Solarized:
+colorscheme solarized
+let g:solarized_termcolors=256
+let g:solarized_termtrans=1
+let g:solarized_visibity="high"
+let g:solarized_contrast="high"
+
+set background=dark
+
+
+let g:black_linelength = 100
+
+
+" FZF Settings
+nmap <c-p> :FZF<CR>
+
+" Tag Jumping and Popping
+nmap <c-i> :GoDecls<CR>
+
+" ctags:
+set tags=$HOME/ctags
+" Fix with <C-j> :ts<CR>
+nnoremap <C-j> <C-]>
+nnoremap <C-b> <C-t>

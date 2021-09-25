@@ -18,6 +18,31 @@ local hotkeys_popup = require("awful.hotkeys_popup")
 -- when client with a matching name is opened:
 require("awful.hotkeys_popup.keys")
 
+
+local battery_widget = require("battery-widget")
+local MON_BAT0 = battery_widget {
+    ac = "AC",
+    adapter = "BAT0",
+    ac_prefix = "AC:",
+    battery_prefix = "BAT:",
+    percent_colors = {
+        { 25, "red"   },
+        { 50, "orange"},
+        {999, "green" },
+    },
+    listen = true,
+    timeout = 10,
+    widget_text = "${AC_BAT}${color_on}${percent}%${color_off}",
+    -- widget_font = "Deja Vu Sans Mono 10",
+    -- widget_font = "Anonymous Pro 10",
+    widget_font = "Terminus 9",
+    tooltip_text = "Battery ${state}${time_est}\nCapacity: ${capacity_percent}%",
+    alert_threshold = 5,
+    alert_timeout = 0,
+    alert_title = "Low battery !",
+    alert_text = "${AC_BAT}${time_est}"
+}
+
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
 -- another config (This code will only ever execute for the fallback config)
@@ -52,6 +77,8 @@ beautiful.init("/home/ttucker/thinkpad/awesome/theme.lua")
 terminal = "urxvt"
 editor = os.getenv("EDITOR") or "vim"
 editor_cmd = terminal .. " -e " .. editor
+web_browser = "chromium"
+priv_web_browser = "chromium --incognito"
 
 -- Default modkey.
 -- Usually, Mod4 is the key with a logo between Control and Alt.
@@ -175,7 +202,8 @@ awful.screen.connect_for_each_screen(function(s)
     set_wallpaper(s)
 
     -- Each screen has its own tag table.
-    awful.tag({ "⠁", "⠃", "⠉", "⠙", "⠑", "⠋", "⠛", "⠓"}, s, awful.layout.layouts[1])
+    -- awful.tag({ "Θ", "Φ", "Σ", "ψ"}, s, awful.layout.layouts[1])
+    awful.tag({ "1", "2", "3", "4", "5", "6", "7", "8"}, s, awful.layout.layouts[1])
 
     -- Create a promptbox for each screen
     s.mypromptbox = awful.widget.prompt()
@@ -219,6 +247,8 @@ awful.screen.connect_for_each_screen(function(s)
         },
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
+            mykeyboardlayout,
+            MON_BAT0,
             wibox.widget.systray(),
             mybattery,
             mytextclock,
@@ -260,8 +290,8 @@ globalkeys = gears.table.join(
         end,
         {description = "focus previous by index", group = "client"}
     ),
-    awful.key({ modkey,           }, "w", function () mymainmenu:show() end,
-              {description = "show main menu", group = "awesome"}),
+    -- awful.key({ modkey,           }, "w", function () mymainmenu:show() end,
+    --          {description = "show main menu", group = "awesome"}),
 
     -- Layout manipulation
     awful.key({ modkey, "Shift"   }, "j", function () awful.client.swap.byidx(  1)    end,
@@ -286,6 +316,10 @@ globalkeys = gears.table.join(
     -- Standard program
     awful.key({ modkey,           }, "Return", function () awful.spawn(terminal) end,
               {description = "open a terminal", group = "launcher"}),
+    awful.key({ modkey, "Shift" }, "w",      function () awful.spawn(web_browser) end,
+              {description = "open a web browser", group = "launcher"}),
+    awful.key({ modkey, "Shift" }, "p",      function () awful.spawn(priv_web_browser) end,
+              {description = "open a private web browser", group = "launcher"}),
     awful.key({ modkey, "Control" }, "r", awesome.restart,
               {description = "reload awesome", group = "awesome"}),
     awful.key({ modkey, "Shift"   }, "q", awesome.quit,
@@ -500,7 +534,7 @@ awful.rules.rules = {
 
     -- Add titlebars to normal clients and dialogs
     { rule_any = {type = { "normal", "dialog" }
-      }, properties = { titlebars_enabled = true }
+      }, properties = { titlebars_enabled = false}
     },
 
     -- Set Firefox to always map on the tag named "2" on screen 1.
