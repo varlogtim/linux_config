@@ -1,0 +1,4 @@
+bind_mounts:
+  - host_path: /home/ttucker/tmp/src/tensorboard
+    container_path: /tmp/tensorboard
+    read_only: true
