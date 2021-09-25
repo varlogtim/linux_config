@@ -7,6 +7,10 @@ Rtags:
 
 
 AwesomeWM:
+ - Remove titles from windows. I don't need this.
+ - Change themes to use the Solarized colors.
+ - Add battery level to status bar
+  - Also, should record battery levels, possibly in rrd, and use it to determine charge/discharge rate.
  - Add IP addresses to status bar
 
 Xresources:
@@ -15,11 +19,12 @@ Xresources:
 Vim:
  - Yank to clipboard? Is this possible?
 
-
-Term Colors:
- - Need to walk through the terminal colors as HSV values and drop the V amount for all colors.
-   Currently, a lot of the secondary colors are just grey scale. This is partiall done.
-
+Git:
+ - *** figure out how to adjust the colors for git diff.
+    - The "unmodified" color is bold
+    - The "added" color is dark.
+    - ^ Need to figure out how to flip these.
+ 
 
 FINISHED!!:
 
@@ -29,15 +34,4 @@ Sound:
   - Yes, it will. DONE!
  - See if a TRRS mic+headphones will work: DONE
 
-Git:
- - *** figure out how to adjust the colors for git diff.
-    - The "unmodified" color is bold
-    - The "added" color is dark.
-    - ^ Need to figure out how to flip these.
-^ this was done in last commit by adjusting the terminal colors.
-
-AwesomeWM:
- - Remove titles from windows. I don't need this :: DONE
- - Change themes to use the Solarized colors :: DONE
- - Add battery level to status bar :: DONE
 
