@@ -139,6 +139,9 @@ mykeyboardlayout = awful.widget.keyboardlayout()
 -- Create a textclock widget
 mytextclock = wibox.widget.textclock()
 
+-- Batter monitor https://github.com/deficient/battery-widget.git
+mybattery = require("battery-widget") {}
+
 -- Create a wibox for each screen and add it
 local taglist_buttons = gears.table.join(
                     awful.button({ }, 1, function(t) t:view_only() end),
@@ -247,6 +250,7 @@ awful.screen.connect_for_each_screen(function(s)
             mykeyboardlayout,
             MON_BAT0,
             wibox.widget.systray(),
+            mybattery,
             mytextclock,
             s.mylayoutbox,
         },

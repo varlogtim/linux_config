@@ -27,6 +27,12 @@ done
 # Variables
 export CSCOPE_EDITOR=/usr/bin/vim
 
+# bash-completion
+BASH_COMPLETION='/usr/share/bash-completion/bash_completion'
+if [ -e ${BASH_COMPLETION} ]; then
+    source ${BASH_COMPLETION}
+fi
+
 # Node.js
 # https://stackoverflow.com/questions/18088372/how-to-npm-install-global-not-as-root
 export NPM_PACKAGES="${HOME}/.npm-packages"

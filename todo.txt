@@ -9,6 +9,7 @@ Rtags:
 AwesomeWM:
  - Add IP addresses to status bar
 
+
 Xresources:
  - Look into changing command line colours to Solarized.
 
@@ -24,7 +25,7 @@ Term Colors:
 FINISHED!!:
 
 Sound:
- - Get sound to work.
+ - Get sound to work. DONE, installed alsa packages.
  - See if plugging in headphones will switch audio device as expected?
   - Yes, it will. DONE!
  - See if a TRRS mic+headphones will work: DONE
@@ -40,4 +41,3 @@ AwesomeWM:
  - Remove titles from windows. I don't need this :: DONE
  - Change themes to use the Solarized colors :: DONE
  - Add battery level to status bar :: DONE
-
