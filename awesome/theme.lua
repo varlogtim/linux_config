@@ -59,8 +59,8 @@ theme.bg_urgent     = solarized.term.bryellow
 theme.bg_minimize   = solarized.term.brgreen
 theme.bg_systray    = solarized.term.brgreen
 
-theme.fg_normal     = solarized.term.brgreen
-theme.fg_focus      = solarized.term.brcyan
+theme.fg_normal     = solarized.term.brcyan
+theme.fg_focus      = solarized.term.brwhite
 theme.fg_urgent     = solarized.violet
 theme.fg_minimize   = "#c5c8c6"
 
