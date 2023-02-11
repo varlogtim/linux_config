@@ -14,7 +14,6 @@ alias less='less -R'
 alias make='make'  # use 8 jobs
 alias ct='ctags -R -o ~/.cache/ctags ./'
 alias xc='xclip'
-alias purgeDevDb='docker kill determined_db; docker container rm determined_db'
 alias ca='conda activate'
 alias cad='conda activate dev-3.7.11'
 alias dact='conda deactivate'
@@ -35,6 +34,7 @@ export GDK_SCALE=0.5
 
 # LD_LIBRARY_PATH  XXX You should probably dynamically set these
 export LD_LIBRARY_PATH=/usr/lib/modules/6.1.9-arch1-1/build/include/:/usr/lib/modules/6.1.9-arch1-1/build/arch/x86/include/:/usr/lib/modules/6.1.9-arch1-1/build/arch/x86/include/generated/
+
 
 # Functions
 FUNC_DIR=$HOME/thinkpad/tools/bash_funcs
@@ -79,6 +79,12 @@ for rc in $HOME/.config/.*.bashrc; do
     source $rc
 done
 
+# XXX Add these to ~/.config/.determined.bashrc
+alias purgeDevDb='docker kill determined_db; docker container rm determined_db'
+alias postgresrm='sudo rm -rf /home/ttucker/.postgres'
+alias dcl='devcluster -c ~/.devcluster.yaml'
+
+
 export TERMINFO="/usr/share/terminfo"
 
 # Go lang
@@ -99,12 +105,6 @@ export PATH=/home/ttucker/tmp/determined/dev-scripts:$PATH
 
 
 
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/home/ttucker/tmp/src/google-cloud-sdk/path.bash.inc' ]; then . '/home/ttucker/tmp/src/google-cloud-sdk/path.bash.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/home/ttucker/tmp/src/google-cloud-sdk/completion.bash.inc' ]; then . '/home/ttucker/tmp/src/google-cloud-sdk/completion.bash.inc'; fi
-
 export TZ='America/New_York';
 
 # A better git log
@@ -124,3 +124,9 @@ else
 fi
 unset __conda_setup
 # <<< conda initialize <<<
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/home/ttucker/tmp/src/google-cloud-sdk/path.bash.inc' ]; then . '/home/ttucker/tmp/src/google-cloud-sdk/path.bash.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/home/ttucker/tmp/src/google-cloud-sdk/completion.bash.inc' ]; then . '/home/ttucker/tmp/src/google-cloud-sdk/completion.bash.inc'; fi
