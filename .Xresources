@@ -46,8 +46,9 @@
 *.color7:       #ffffd7
 
 ! Xft
-!Xft.dpi: 144
-Xft.dpi: 152
+!Xft.dpi: 96
+Xft.dpi: 144
+!Xft.dpi: 192
 Xft.autohint: 0
 ! Xft.hintstyle: hintfull
 ! Xft.hinting: 1
@@ -73,7 +74,7 @@ URxvt.letterSpace: 0
 URxvt.lineSpace: 0
 
 !! Copy Paste & Other Extensions
-URxvt.perl-ext-common: default,clipboard,url-select,keyboard-select,resize-font
+URxvt.perl-ext-common: default,clipboard,url-select,keyboard-select,resize-font,font-size
 URxvt.copyCommand: xclip -i -selection clipboard
 URxvt.pasteCommand: xclip -o -selection clipboard
 

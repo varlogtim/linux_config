@@ -96,9 +96,20 @@ let g:solarized_contrast="high"
 
 set background=dark
 
-
 let g:black_linelength = 100
 
+" ctags:
+set tags=$HOME/ctags
+
+
+" Map modes
+" n  Normal mode map. Defined using ':nmap' or ':nnoremap'.
+" i  Insert mode map. Defined using ':imap' or ':inoremap'.
+" v  Visual and select mode map. Defined using ':vmap' or ':vnoremap'.
+" x  Visual mode map. Defined using ':xmap' or ':xnoremap'.
+" s  Select mode map. Defined using ':smap' or ':snoremap'.
+" c  Command-line mode map. Defined using ':cmap' or ':cnoremap'.
+" o  Operator pending mode map. Defined using ':omap' or ':onoremap'.
 
 " FZF Settings
 nmap <c-p> :FZF<CR>
@@ -106,8 +117,6 @@ nmap <c-p> :FZF<CR>
 " Tag Jumping and Popping
 nmap <c-i> :GoDecls<CR>
 
-" ctags:
-set tags=$HOME/ctags
 " Fix with <C-j> :ts<CR>
-nnoremap <C-j> <C-]>
-nnoremap <C-b> <C-t>
+nmap <C-j> <C-]>
+nmap <C-b> <C-t>

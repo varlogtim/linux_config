@@ -77,8 +77,12 @@ beautiful.init("/home/ttucker/thinkpad/awesome/theme.lua")
 terminal = "urxvt"
 editor = os.getenv("EDITOR") or "vim"
 editor_cmd = terminal .. " -e " .. editor
+web_browser = "google-chrome-unstable" -- "chromium"
+priv_web_browser = "google-chrome-unstable --incognito" -- "chromium --incognito"
 web_browser = "chromium"
 priv_web_browser = "chromium --incognito"
+
+screen_shot = "scrot /home/ttucker/Downloads/screenshots/%Y-%m-%d-%T-screenshot.png"
 
 -- Default modkey.
 -- Usually, Mod4 is the key with a logo between Control and Alt.
@@ -314,6 +318,8 @@ globalkeys = gears.table.join(
         {description = "go back", group = "client"}),
 
     -- Standard program
+    awful.key({ modkey, "Shift" }, "s", function () awful.spawn(screen_shot) end,
+              {description = "screen shot", group = "launcher"}),
     awful.key({ modkey,           }, "Return", function () awful.spawn(terminal) end,
               {description = "open a terminal", group = "launcher"}),
     awful.key({ modkey, "Shift" }, "w",      function () awful.spawn(web_browser) end,
