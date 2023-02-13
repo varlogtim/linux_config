@@ -68,7 +68,7 @@ URxvt*internalBorder: 2
 URxvt.letterSpace: 1.2
 URxvt.lineSpace: 0
 
-URxvt.font: xft:Terminus:pixelsize=24
+URxvt.font: xft:Terminus:pixelsize=22
 URxvt.letterSpace: 0
 URxvt.lineSpace: 0
 
