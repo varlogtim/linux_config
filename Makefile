@@ -8,6 +8,7 @@ install:
 	ln -v -s $(PWD)/.xinitrc ~/.xinitrc
 	ln -v -s $(PWD)/.Xresources ~/.Xresources
 	ln -v -s $(PWD)/.vimrc ~/.vimrc
+	mkdir -v ~/.config
 	ln -v -s $(PWD)/awesome ~/.config/awesome
 	ln -v -s $(PWD)/chromium-flags.config ~/.config/chromium-flags.conf
 
