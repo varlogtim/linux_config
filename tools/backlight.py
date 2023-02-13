@@ -25,12 +25,13 @@ except Exception:
     sys.exit(1)
 
 max_brightness = int(open(max_brightness_path, 'r').read().strip())
-set_brightness = int(max_brightness * (target_percentage / 100))
+set_brightness = int(1 + max_brightness * ((target_percentage - 1) / 100))
+
+msg = "Backlight set to {}% ({})".format(target_percentage, set_brightness)
+print(msg)
 
 if set_brightness < 0 or set_brightness > max_brightness:
     raise ValueError("Brightness bounds error")
 
 open(brightness_path, 'w').write(str(set_brightness))
 
-msg = "Backlight set to {}% ({})".format(target_percentage, set_brightness)
-print(msg)
