@@ -45,7 +45,7 @@ let g:ale_sign_error = 'x'
 let g:ale_sign_warning = '^'
 let g:ale_sign_column_always = 1
 let g:ale_linters = {
-    \   'python': ['flake8'],
+    \   'python': ['flake8 --ignore=Q000'],
     \   'cpp': [],
     \}
 
