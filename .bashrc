@@ -5,8 +5,7 @@
 
 # Aliases
 alias ls='ls --color=always'
-alias grep='grep --color=always'
-alias grepc='grep --color=never'
+alias grepc='grep --color=always'
 alias cp='cp -v'
 alias mv='mv -v'
 alias rm='rm -iv'
@@ -15,7 +14,12 @@ alias make='make'  # use 8 jobs
 alias ct='ctags -R -o ~/.cache/ctags ./'
 alias xc='xclip'
 alias ca='conda activate'
-alias cad='conda activate dev-3.7.11'
+alias cad='conda activate py-3.9.17'
+alias cad38='conda activate py-3.8.10'
+alias cad37='conda activate py-3.7.11-2'
+alias cad_genai='conda activate genAI_py3.10'
+alias nodet='conda activate py-3.9.17-NO-DETERMINED'
+alias cad310='conda activate cad310'
 alias dact='conda deactivate'
 alias dcl='devcluster -c ~/.devcluster.yaml'
 alias token='export TOKEN=$(curl -X POST -d "{\"username\": \"admin\", \"password\": \"\"}" ${DET_MASTER}/api/v1/auth/login | jq ".token" | sed "s/\"//g")'
@@ -24,12 +28,28 @@ alias dt='date +"%Y%m%dT%H%M%S"'
 alias desc='det e describe'
 alias rmdb='sudo rm -vrf ~/.postgres/'
 alias topmem='top -bn1 -o%MEM | head -n 20'
+alias wakeup='export DISPLAY=:0; xrandr --output DP-4 --mode 3840x2160'
+alias k='kubectl'
+alias jiggle='while true; do DISPLAY=:0 xdotool mousemove $(( 1 + $RANDOM % 1920 )) $(( 1 + $RANDOM % 1080 )); sleep 1; done'
 
 # function gitfullblame { git blame $1 | cut -d" " -f1 | uniq | while read sha; do git show $sha; done; }
 # export -f gitfullblame
+#
+# Make function for this:
+# det e lt --csv 389 |grep -E '^[0-9]+'
+
+# Browser
+export BROWSER="/usr/bin/chromium"
 
 # Display stuff:
 export GDK_SCALE=0.5
+
+# Emacs mode
+set -o emacs
+
+# Less and Pager
+#export LESS="--use-color -M -R -X -W"
+#export PAGER=less
 
 
 # LD_LIBRARY_PATH  XXX You should probably dynamically set these
@@ -79,19 +99,22 @@ for rc in $HOME/.config/.*.bashrc; do
     source $rc
 done
 
+# Determined
 # XXX Add these to ~/.config/.determined.bashrc
-alias purgeDevDb='docker kill determined_db; docker container rm determined_db'
 alias postgresrm='sudo rm -rf /home/ttucker/.postgres'
 alias dcl='devcluster -c ~/.devcluster.yaml'
-
 
 export TERMINFO="/usr/share/terminfo"
 
 # Go lang
 # curl -LO https://dl.google.com/go/go1.17.2.linux-amd64.tar.gz 
 # curl -LO https://go.dev/dl/go1.18.10.linux-amd64.tar.gz
-export GOROOT="$HOME/tmp/src/golang/go-1.18.10"
-export GOPATH="$HOME/tmp/go_roots/go-1.18.10"
+# export GOROOT="$HOME/tmp/src/golang/go-1.20.1"
+# export GOPATH="$HOME/tmp/go_roots/go-1.20.1"
+export GOROOT="$HOME/tmp/src/golang/go-1.21.0"
+export GOPATH="$HOME/tmp/go_roots/go-1.21.0"
+# export GOROOT="$HOME/tmp/src/golang/go-1.22.1"
+# export GOPATH="$HOME/tmp/go_roots/go-1.22.1"
 export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
 
 # System Go
@@ -112,7 +135,7 @@ git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Crese
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/ttucker/miniconda3/condabin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+__conda_setup="$('/home/ttucker/miniconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
 else
@@ -130,3 +153,4 @@ if [ -f '/home/ttucker/tmp/src/google-cloud-sdk/path.bash.inc' ]; then . '/home/
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/home/ttucker/tmp/src/google-cloud-sdk/completion.bash.inc' ]; then . '/home/ttucker/tmp/src/google-cloud-sdk/completion.bash.inc'; fi
+. "$HOME/.cargo/env"

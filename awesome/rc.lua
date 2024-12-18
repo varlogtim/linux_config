@@ -43,6 +43,14 @@ local MON_BAT0 = battery_widget {
     alert_text = "${AC_BAT}${time_est}"
 }
 
+--- {{{ naughty timeout
+naughty.config.notify_callback = function(args)
+    args.timeout = 5
+    return args
+end
+--- }}}
+
+
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
 -- another config (This code will only ever execute for the fallback config)
