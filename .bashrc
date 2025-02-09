@@ -18,17 +18,18 @@ alias cad='conda activate py-3.9.17'
 alias cad38='conda activate py-3.8.10'
 alias cad37='conda activate py-3.7.11-2'
 alias cad_genai='conda activate genAI_py3.10'
+alias dev='conda activate dev-py3.12'
 alias nodet='conda activate py-3.9.17-NO-DETERMINED'
 alias cad310='conda activate cad310'
 alias dact='conda deactivate'
-alias dcl='devcluster -c ~/.devcluster.yaml'
+alias dcl='devcluster -c ~/tmp/determined/.devcluster.yaml'
 alias token='export TOKEN=$(curl -X POST -d "{\"username\": \"admin\", \"password\": \"\"}" ${DET_MASTER}/api/v1/auth/login | jq ".token" | sed "s/\"//g")'
 alias mnistp="det e create ~/determined/examples/tutorials/mnist_pytorch/const.yaml ~/determined/examples/tutorials/mnist_pytorch/"
 alias dt='date +"%Y%m%dT%H%M%S"'
 alias desc='det e describe'
 alias rmdb='sudo rm -vrf ~/.postgres/'
 alias topmem='top -bn1 -o%MEM | head -n 20'
-alias wakeup='export DISPLAY=:0; xrandr --output DP-4 --mode 3840x2160'
+alias wakeup='export DISPLAY=:0; xrandr --output DP-0 --mode 3840x2160'
 alias k='kubectl'
 alias jiggle='while true; do DISPLAY=:0 xdotool mousemove $(( 1 + $RANDOM % 1920 )) $(( 1 + $RANDOM % 1080 )); sleep 1; done'
 
@@ -53,7 +54,10 @@ set -o emacs
 
 
 # LD_LIBRARY_PATH  XXX You should probably dynamically set these
-export LD_LIBRARY_PATH=/usr/lib/modules/6.1.9-arch1-1/build/include/:/usr/lib/modules/6.1.9-arch1-1/build/arch/x86/include/:/usr/lib/modules/6.1.9-arch1-1/build/arch/x86/include/generated/
+export LD_LIBRARY_PATH=/usr/lib/modules/$(uname -r)/build/include/:/usr/lib/modules/$(uname -r)/build/arch/x86/include/:/usr/lib/modules/$(uname -r)/build/arch/x86/include/generated/:/usr/include/
+export LIBRARY_PATH=/usr/lib/modules/$(uname -r)/build/include/:/usr/lib/modules/$(uname -r)/build/arch/x86/include/:/usr/lib/modules/$(uname -r)/build/arch/x86/include/generated/:/usr/include/
+export C_INCLUDE=/usr/lib/modules/$(uname -r)/build/include/:/usr/lib/modules/$(uname -r)/build/arch/x86/include/:/usr/lib/modules/$(uname -r)/build/arch/x86/include/generated/:/usr/include/
+
 
 
 # Functions
@@ -154,3 +158,11 @@ if [ -f '/home/ttucker/tmp/src/google-cloud-sdk/path.bash.inc' ]; then . '/home/
 # The next line enables shell command completion for gcloud.
 if [ -f '/home/ttucker/tmp/src/google-cloud-sdk/completion.bash.inc' ]; then . '/home/ttucker/tmp/src/google-cloud-sdk/completion.bash.inc'; fi
 . "$HOME/.cargo/env"
+
+
+# NVM
+# /usr/share/nvm/init-nvm.sh
+[ -z "$NVM_DIR" ] && export NVM_DIR="$HOME/.nvm"
+source /usr/share/nvm/nvm.sh
+source /usr/share/nvm/bash_completion
+source /usr/share/nvm/install-nvm-exec
