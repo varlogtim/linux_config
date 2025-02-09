@@ -50,8 +50,8 @@ solarized.term.brblack  = "#1c1c1c"
 
 local theme = {}
 
--- theme.font          = "Anonymous Pro 10"
-theme.font          = "Terminus 9"
+theme.font          = "Anonymous Pro 12"
+--theme.font          = "Terminus 14"
 
 theme.bg_normal     = solarized.term.brblack
 theme.bg_focus      = solarized.term.black
@@ -65,11 +65,11 @@ theme.fg_urgent     = solarized.violet
 theme.fg_minimize   = "#c5c8c6"
 
 theme.useless_gap   = 0 -- dpi(1.0)
-theme.border_width  = 1 -- dpi(0.4)
+theme.border_width  = 4 -- dpi(0.4)
 --theme.border_normal = "#000000"
-theme.border_normal = solarized.term.black
+theme.border_normal = solarized.term.brgreen
 --theme.border_focus  = "#373b41"
-theme.border_focus  = solarized.term.bryellow
+theme.border_focus  = solarized.term.yellow
 theme.border_marked = "#cc6666"
 
 -- There are other variable sets
