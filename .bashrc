@@ -61,7 +61,8 @@ export C_INCLUDE=/usr/lib/modules/$(uname -r)/build/include/:/usr/lib/modules/$(
 
 
 # Functions
-FUNC_DIR=$HOME/thinkpad/tools/bash_funcs
+# XXX Need to make this relative
+FUNC_DIR=$HOME/linux_config/tools/bash_funcs
 for f in $FUNC_DIR/*; do
     source $f
 done
