@@ -81,6 +81,7 @@ end
 -- beautiful.init(gears.filesystem.get_themes_dir() .. "zenburn/theme.lua")
 beautiful.init("/home/ttucker/.config/awesome/theme.lua")
 
+
 -- This is used later as the default terminal and editor to run.
 terminal = "urxvt"
 editor = os.getenv("EDITOR") or "vim"

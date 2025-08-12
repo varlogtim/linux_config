@@ -64,8 +64,8 @@ theme.fg_focus      = solarized.term.brwhite
 theme.fg_urgent     = solarized.violet
 theme.fg_minimize   = "#c5c8c6"
 
-theme.useless_gap   = 0 -- dpi(1.0)
-theme.border_width  = 4 -- dpi(0.4)
+theme.useless_gap   = 0.1 -- dpi(1.0)
+theme.border_width  = 5 -- dpi(0.4)
 --theme.border_normal = "#000000"
 theme.border_normal = solarized.term.brgreen
 --theme.border_focus  = "#373b41"

@@ -35,7 +35,18 @@ Plug 'leafgarland/typescript-vim'
 Plug 'pangloss/vim-javascript'
 
 " You Complete Me
-Plug 'Valloric/YouCompleteMe'
+"Plug 'Valloric/YouCompleteMe'
+function! BuildYCM(info)
+  " info is a dictionary with 3 fields
+  " - name:   name of the plugin
+  " - status: 'installed', 'updated', or 'unchanged'
+  " - force:  set on PlugInstall! or PlugUpdate!
+  if a:info.status == 'installed' || a:info.force
+    !./install.py
+  endif
+endfunction
+
+Plug 'ycm-core/YouCompleteMe', { 'do': function('BuildYCM') }
 Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
 let g:ycm_confirm_extra_conf = 0
 

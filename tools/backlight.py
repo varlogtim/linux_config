@@ -2,7 +2,9 @@
 import os
 import sys
 
-backlight_dir = '/sys/class/backlight/intel_backlight/'
+# XXX Need to programatically find this location
+backlight_dir = '/sys/class/backlight/'
+backlight_dir = '/sys/class/backlight/amdgpu_bl1/'
 brightness_path = '{}{}'.format(backlight_dir, "brightness")
 max_brightness_path = '{}{}'.format(backlight_dir, "max_brightness")
 
