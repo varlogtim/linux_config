@@ -70,6 +70,7 @@ theme.border_width  = 5 -- dpi(0.4)
 theme.border_normal = solarized.term.brgreen
 --theme.border_focus  = "#373b41"
 theme.border_focus  = solarized.term.yellow
+theme.border_focus  = "#af8700"
 theme.border_marked = "#cc6666"
 
 -- There are other variable sets

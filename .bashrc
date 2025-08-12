@@ -13,12 +13,19 @@ alias less='less -R'
 alias make='make'  # use 8 jobs
 alias ct='ctags -R -o ~/.cache/ctags ./'
 alias xc='xclip'
+
+alias wakeup='export DISPLAY=:0; xrandr --output DP-0 --mode 3840x2160'
+
+# Conda Envs
 alias ca='conda activate'
-alias cad='conda activate py-3.9.17'
 alias cad38='conda activate py-3.8.10'
 alias cad37='conda activate py-3.7.11-2'
 alias cad_genai='conda activate genAI_py3.10'
-alias dev='conda activate dev-py3.12'
+alias dev='conda activate dev-py3.10'
+alias dev311='conda activate dev-py3.11'
+alias dev39='conda activate py-3.9.17'
+alias mlis="conda activate dev-py3.10; source $HOME/tmp/hpe/virtual_envs/aioli/bin/activate"
+alias dbrm_aioli="sudo rm -rf /home/ttucker/.postgres-aioli-test"
 alias nodet='conda activate py-3.9.17-NO-DETERMINED'
 alias cad310='conda activate cad310'
 alias dact='conda deactivate'
@@ -29,7 +36,6 @@ alias dt='date +"%Y%m%dT%H%M%S"'
 alias desc='det e describe'
 alias rmdb='sudo rm -vrf ~/.postgres/'
 alias topmem='top -bn1 -o%MEM | head -n 20'
-alias wakeup='export DISPLAY=:0; xrandr --output DP-0 --mode 3840x2160'
 alias k='kubectl'
 alias jiggle='while true; do DISPLAY=:0 xdotool mousemove $(( 1 + $RANDOM % 1920 )) $(( 1 + $RANDOM % 1080 )); sleep 1; done'
 
@@ -61,11 +67,12 @@ export C_INCLUDE=/usr/lib/modules/$(uname -r)/build/include/:/usr/lib/modules/$(
 
 
 # Functions
-# XXX Need to make this relative
-FUNC_DIR=$HOME/linux_config/tools/bash_funcs
-for f in $FUNC_DIR/*; do
-    source $f
-done
+FUNC_DIR=$HOME/thinkpad/tools/bash_funcs
+if [ -f $FUNC_DIR ]; then 
+    for f in $FUNC_DIR/*; do
+        source $f
+    done
+fi
 
 function dget {
     curl -H "Authorization: Bearer ${TOKEN}" -H  "accept: application/json" -X GET "${DET_MASTER}${1}"
@@ -114,12 +121,17 @@ export TERMINFO="/usr/share/terminfo"
 # Go lang
 # curl -LO https://dl.google.com/go/go1.17.2.linux-amd64.tar.gz 
 # curl -LO https://go.dev/dl/go1.18.10.linux-amd64.tar.gz
-# export GOROOT="$HOME/tmp/src/golang/go-1.20.1"
-# export GOPATH="$HOME/tmp/go_roots/go-1.20.1"
-export GOROOT="$HOME/tmp/src/golang/go-1.21.0"
-export GOPATH="$HOME/tmp/go_roots/go-1.21.0"
-# export GOROOT="$HOME/tmp/src/golang/go-1.22.1"
-# export GOPATH="$HOME/tmp/go_roots/go-1.22.1"
+# curl -LO https://go.dev/dl/go1.24.1.linux-amd64.tar.gz
+# export GOROOT="$HOME/tmp/golang/go-1.20.1"
+# export GOPATH="$HOME/tmp/golang/go_roots/go-1.20.1"
+# export GOROOT="$HOME/tmp/golang/go-1.21.0"
+# export GOPATH="$HOME/tmp/golang/go_roots/go-1.21.0"
+# export GOROOT="$HOME/tmp/golang/go-1.22.1"
+# export GOPATH="$HOME/tmp/golang/go_roots/go-1.22.1"
+# export GOROOT="$HOME/tmp/golang/go-1.23.7"
+# export GOPATH="$HOME/tmp/golang/go_roots/go-1.23.7"
+export GOROOT="$HOME/tmp/golang/go-1.24.1"
+export GOPATH="$HOME/tmp/golang/go_roots/go-1.24.1"
 export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
 
 # System Go
