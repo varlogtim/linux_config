@@ -1,65 +1,27 @@
-# Default config for sway
-#
-# Copy this to ~/.config/sway/config and edit it to your liking.
-#
 # Read `man 5 sway` for a complete reference.
 
-### Variables
 #
-# Logo key. Use Mod1 for Alt.
+# TODO: Mission: programatically generate sections of this config.
+#  - Motivation: Need to have single places for colors to provide consistent look and feel.
+#  - How?
+#    - Split this config into various pieces for each section.
+#    - Include each section in the main config.
+#    - Investigate ways of generating the different sections of the config.
+#    - Potentially using "configparser" package from Python.
+
+### Variables
 set $mod Mod4
-# Home row direction keys, like vim
+
 set $left h
 set $down j
 set $up k
 set $right l
-# Your preferred terminal emulator
-#set $term foot
+
 set $term alacritty
-# Your preferred application launcher
 set $menu wmenu-run
 
 ### Output configuration
-#
-# Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
-#
-# Example configuration:
-#
-#   output HDMI-A-1 resolution 1920x1080 position 1920,0
-#
-# You can get the names of your outputs by running: swaymsg -t get_outputs
-
-### Idle configuration
-#
-# Example configuration:
-#
-# exec swayidle -w \
-#          timeout 300 'swaylock -f -c 000000' \
-#          timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
-#          before-sleep 'swaylock -f -c 000000'
-#
-# This will lock your screen after 300 seconds of inactivity, then turn off
-# your displays after another 300 seconds, and turn your screens back on when
-# resumed. It will also lock your screen before your computer goes to sleep.
-
-### Input configuration
-#
-# Example configuration:
-#
-#   input type:touchpad {
-#       dwt enabled
-#       tap enabled
-#       natural_scroll enabled
-#       middle_emulation enabled
-#   }
-#
-#   input type:keyboard {
-#       xkb_layout "eu"
-#   }
-#
-# You can also configure each device individually.
-# Read `man 5 sway-input` for more information about this section.
+output * bg #000000 solid_color
 
 ### Key bindings
 #
@@ -74,11 +36,6 @@ output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
     # Start your launcher
     bindsym $mod+d exec $menu
 
-    # Drag floating windows by holding down $mod and left mouse button.
-    # Resize them with right mouse button + $mod.
-    # Despite the name, also works for non-floating windows.
-    # Change normal to inverse to use left mouse button for resizing and right
-    # mouse button for dragging.
     floating_modifier $mod normal
 
     # Reload the configuration file
@@ -94,22 +51,12 @@ output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
     bindsym $mod+$down focus down
     bindsym $mod+$up focus up
     bindsym $mod+$right focus right
-    # Or use $mod+[up|down|left|right]
-    bindsym $mod+Left focus left
-    bindsym $mod+Down focus down
-    bindsym $mod+Up focus up
-    bindsym $mod+Right focus right
 
     # Move the focused window with the same, but add Shift
     bindsym $mod+Shift+$left move left
     bindsym $mod+Shift+$down move down
     bindsym $mod+Shift+$up move up
     bindsym $mod+Shift+$right move right
-    # Ditto, with arrow keys
-    bindsym $mod+Shift+Left move left
-    bindsym $mod+Shift+Down move down
-    bindsym $mod+Shift+Up move up
-    bindsym $mod+Shift+Right move right
 #
 # Workspaces:
 #
@@ -178,20 +125,11 @@ output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
 # Resizing containers:
 #
 mode "resize" {
-    # left will shrink the containers width
-    # right will grow the containers width
-    # up will shrink the containers height
-    # down will grow the containers height
-    bindsym $left resize shrink width 10px
-    bindsym $down resize grow height 10px
-    bindsym $up resize shrink height 10px
-    bindsym $right resize grow width 10px
-
-    # Ditto, with arrow keys
-    bindsym Left resize shrink width 10px
-    bindsym Down resize grow height 10px
-    bindsym Up resize shrink height 10px
-    bindsym Right resize grow width 10px
+    bindsym $left resize shrink width 30px
+    bindsym $down resize grow height 30px
+    bindsym $up resize shrink height 30px
+    bindsym $right resize grow width 30px
+    # TODO: Probably should make the pixel size relative to screen resolution
 
     # Return to default mode
     bindsym Return mode "default"
@@ -201,6 +139,7 @@ bindsym $mod+r mode "resize"
 #
 # Utilities:
 #
+    # TODO: Find binds for these.
     # Special keys to adjust volume via PulseAudio
     bindsym --locked XF86AudioMute exec pactl set-sink-mute \@DEFAULT_SINK@ toggle
     bindsym --locked XF86AudioLowerVolume exec pactl set-sink-volume \@DEFAULT_SINK@ -5%
@@ -210,6 +149,7 @@ bindsym $mod+r mode "resize"
     bindsym --locked XF86MonBrightnessDown exec brightnessctl set 5%-
     bindsym --locked XF86MonBrightnessUp exec brightnessctl set 5%+
     # Special key to take a screenshot with grim
+    # TODO: Need to think about what screen shot manager to use.
     bindsym Print exec grim
 
 #
@@ -225,9 +165,54 @@ bar {
 
     colors {
         statusline #ffffff
-        background #323232
+        background #010101
         inactive_workspace #32323200 #32323200 #5c5c5c
     }
 }
+
+
+
+###########
+# Theme
+
+# Font
+font "Anonymous Pro 16"
+default_border pixel 3
+
+# Colors
+set $bg     #000000
+set $brbg   #212121
+set $fg     #bcbcbc
+
+set $black      #3c3c3c
+set $red        #8a0000
+set $green      #4d6e00
+set $yellow     #7d6000
+set $blue       #005fb3
+set $magenta    #7d0045
+set $cyan       #007d7d
+set $white      #d7d7af
+
+set $brblack    #575757
+set $brred      #d70000
+set $brgreen    #5f8700
+set $bryellow   #af8700
+set $brblue     #0087ff
+set $brmagenta  #af005f
+set $brcyan     #00afaf
+set $brwhite    #ffffd7
+
+# Abstracted colors
+set $fg_text    $brwhite
+set $bg_text    $white
+set $fg_frame   $black
+set $bg_frame   $brbg
+
+# Borders and colors
+#                       border      background  text        indicator   child_border
+client.focused          $black      $cyan       $fg_text    $yellow     $fg_frame
+client.focused_inactive $bg_frame   $black      $bg_text    $yellow     $bg_frame
+client.unfocused        $bg_frame   $black      $bg_text    $yellow     $bg_frame
+client.urgent           $bg_frame   $brred      $bg_text    $yellow     $bg_frame
 
 include /etc/sway/config.d/*

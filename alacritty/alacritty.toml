@@ -1,0 +1,46 @@
+[font]
+size = 18
+
+[font.normal]
+family = "Anonymous Pro"
+style = "regular"
+
+[font.bold]
+style = "Bold"
+
+[font.italic]
+style = "Italic"
+
+[colors.primary]
+background = "#000000"
+foreground = "#bcbcbc"
+
+[colors.normal]
+black = "#3c3c3c"
+red = "#8a0000"
+green = "#4d6e00"
+yellow = "#7d6000"
+blue = "#005fb3"
+magenta = "#7d0045"
+cyan = "#007d7d"
+white = "#ffffd7"
+
+[colors.bright]
+black = "#575757"
+red = "#d70000"
+green = "#5f8700"
+yellow = "#af8700"
+blue = "#0087ff"
+magenta = "#af005f"
+cyan = "#00afaf"
+white = "#d7d7af"
+
+[colors.cursor]
+cursor = "#af8700"
+
+[window]
+padding.x = 5
+padding.y = 5
+
+[scrolling]
+history = 100000
