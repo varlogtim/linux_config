@@ -1,5 +1,5 @@
 [font]
-size = 18
+size = 20
 
 [font.normal]
 family = "Anonymous Pro"
@@ -16,7 +16,8 @@ background = "#000000"
 foreground = "#bcbcbc"
 
 [colors.normal]
-black = "#3c3c3c"
+#black = "#3c3c3c" # Can't seem to figure out what this changes
+black = "#818181"
 red = "#8a0000"
 green = "#4d6e00"
 yellow = "#7d6000"
@@ -26,7 +27,18 @@ cyan = "#007d7d"
 white = "#ffffd7"
 
 [colors.bright]
-black = "#575757"
+black = "#818181"
+red = "#d70000"
+green = "#5f8700"
+yellow = "#af8700"
+blue = "#0087ff"
+magenta = "#af005f"
+cyan = "#00afaf"
+white = "#d7d7af"
+
+# These are duplicates
+[colors.dim]
+black = "#818181"
 red = "#d70000"
 green = "#5f8700"
 yellow = "#af8700"
@@ -36,11 +48,11 @@ cyan = "#00afaf"
 white = "#d7d7af"
 
 [colors.cursor]
-cursor = "#af8700"
+cursor = "#af005f"
 
 [window]
-padding.x = 5
-padding.y = 5
+padding.x = 3
+padding.y = 2
 
 [scrolling]
 history = 100000
