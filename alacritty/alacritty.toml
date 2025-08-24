@@ -59,6 +59,12 @@ history = 100000
 
 [keyboard]
 bindings = [
-   { key = "V", mods = "Control|Shift", action = "Paste" },
-   { key = "Insert", mods = "Shift", action = "Paste" }
+    { key = "V", mods = "Control|Shift", action = "Paste" },
+    { key = "Insert", mods = "Shift", action = "Paste" },
+    { key = "Space", mods = "Control|Shift", action = "ToggleViMode" }
 ]
+
+[selection]
+save_to_clipboard = true
+
+
