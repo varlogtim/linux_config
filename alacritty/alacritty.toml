@@ -59,6 +59,23 @@ history = 100000
 
 [keyboard]
 bindings = [
-   { key = "V", mods = "Control|Shift", action = "Paste" },
-   { key = "Insert", mods = "Shift", action = "Paste" }
+    { key = "V", mods = "Control|Shift", action = "Paste" },
+    { key = "Insert", mods = "Shift", action = "Paste" },
+    { key = "Space", mods = "Control|Shift", action = "ToggleViMode" }
 ]
+
+[selection]
+save_to_clipboard = true
+
+
+[hints]
+alphabet = "jfkdls;ahgurieowpq"
+
+[[hints.enabled]]
+hyperlinks = true
+# command = { program = "firefox", args = ["--new-tab"] }
+action = "Copy"
+post_processing = true
+persist = false
+binding = { key = "O", mods = "Control|Shift"} # , mode = "~Vi" }
+regex = "(ipfs:|ipns:|magnet:|mailto:|gemini://|gopher://|https://|http://|news:|file:|git://|ssh:|ftp://)[^\u0000-\u001F\u007F-\u009F<>\"\\s{-}\\^⟨⟩`\\\\]+"
