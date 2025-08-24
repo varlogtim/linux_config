@@ -21,7 +21,7 @@
 # Theme
 
 # Font
-font "Anonymous Pro 19"
+font "Hack 19"
 default_border pixel 3
 
 # Colors
@@ -186,8 +186,8 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 
-# Utilities:
-## Audio
+## Utilities:
+# Audio
     # TODO: Find binds for these.
     # Special keys to adjust volume via PulseAudio
     bindsym --locked XF86AudioMute exec pactl set-sink-mute \@DEFAULT_SINK@ toggle
@@ -201,24 +201,76 @@ bindsym $mod+r mode "resize"
     # TODO: Need to think about what screen shot manager to use.
     bindsym Print exec grim
 
-
+##
 ## Copy/Paste
-# Monitor clipboard
+##
 
-# UX: select from menu, shift+ins, to paste.
+## Information:
+#
+# There are two kinds of clipboards:
+# 
+# 1. Primary Clipboard
+#  - wayland specific
+#  - text is automatically copied when selected.
+#  - volatile
+#  - Paste method with middle click
+# 2. Regular (System) Clipboard.
+#  - standard clipboard used for explicit copy/paste operations.
+#  - persistent
+#  - Paste method: Shift+Ins or Ctrl+v
+#  - Application dependent.
+#
+# Firefox (likely all others except if overriden by the application):
+#  - Middle click pasts Primary Clipboard
+#  - Shift+ins and Ctrl+v paste the Regular Clipboard.
+#
+# Alacritty specific things:
+#  - Shift+Ins and middle click paste the Primary Clipboard.
+#    - As someone who used Shift+Ins, this presented me with confusion.
+#  - Ctrl+Shift+v, by default, pastes the Regular Clipboard.
+#    - This can be rebound, and I likely will.
+
+## Todos:
+#
+# 1. About Keyboards without an Insert key.
+#
+# Laptops, and keyboards smaller than TKL, often don't have a insert key.
+# Seems silly to run a whole service (ydotool) just to remap one key combination.
+# Will think of a better solution to the lack of insert key later.
+#
+# 2. Vim yank buffer into Regular Clipboard.
+#
+
+## Desired UX:
+# 1. User highlights text in any application.
+# 2. Text is stored later for retreval.
+# 3. User presses, Shift+Insert, most recently highlighted text is pasted.
+# 4. User presses, $mod+Ctrl+p, searchable list of all previously highled text appears.
+# 5. User selects entry from list with enter key.
+# 6. User presses, Shift+Insert, and selected entry is pasted.
+
+# Monitor the Regular (System) Clipboard and send to cliphist for storage.
 exec wl-paste --type text --watch cliphist store
-exec wl-paste --primary --type text --watch cliphist store
-bindsym Ctrl+Shift+p exec sh -c 'cliphist list | wofi -S dmenu | cliphist decode | wl-copy'
 
-# Status Bar:
+# Monitor Primary (application specific) Clipboard and send to Regular Clipboard. I.e., sync them.
+# This allows any highlighted text in any application to be immediately pasted anywhere.
+# NOTE: The wl-paste command above this is responsible for storing this in cliphist
+exec wl-paste --primary --type text --watch sh -c "wl-paste --primary --no-newline | wl-copy"
+
+# Read the cliphist, which should contain both Regular and Primary Clipboard entries and allow
+# the selection of an entry from our clipboard history and places it in the Regular Clipboard.
+bindsym $mod+Ctrl+p exec sh -c 'cliphist list | wofi -S dmenu | cliphist decode | wl-copy'
+
+
+## Status Bar:
 # Read `man 5 sway-bar` for more information about this section.
 bar {
     position top
+    font "Hack 19"
 
     # When the status_command prints a new line to stdout, swaybar updates.
     # The default just shows the current date and time.
     status_command while date +'%Y-%m-%d %X'; do sleep 1; done
-
     colors {
         statusline $fg
         background $brbg
