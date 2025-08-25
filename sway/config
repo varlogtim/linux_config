@@ -11,17 +11,16 @@
 
 
 # TODO LIST:
-# - Copy/paste
 # - Update titles
 # - There is something about the title bars, maybe
-# - Vim yank buffer into clip board
 # - 12 different gray levels
+# - Need keybind for taking screen shots.
 
 ###########
 # Theme
 
 # Font
-font "Hack 19"
+font "Hack Nerd Font 18"
 default_border pixel 3
 
 # Colors
@@ -266,7 +265,7 @@ bindsym $mod+Ctrl+p exec sh -c 'cliphist list | wofi -S dmenu | cliphist decode 
 # Read `man 5 sway-bar` for more information about this section.
 bar {
     position top
-    font "Hack 19"
+    font "Hack Nerd Font 18"
 
     # When the status_command prints a new line to stdout, swaybar updates.
     # The default just shows the current date and time.
