@@ -5,17 +5,8 @@ Rtags:
 - Since a lot of projects use make, as opposed to cmake, the compile_commands.json file does not exist.
 - There is apparently a wrapper for make called, 'bear': https://github.com/rizsotto/Bear
 
-
-AwesomeWM:
- - Add IP addresses to status bar
-
-
-Xresources:
- - Look into changing command line colours to Solarized.
-
-Vim:
- - Yank to clipboard? Is this possible?
-
+Sway:
+ - Unknown
 
 Term Colors:
  - Need to walk through the terminal colors as HSV values and drop the V amount for all colors.
@@ -26,9 +17,6 @@ FINISHED!!:
 
 Sound:
  - Get sound to work. DONE, installed alsa packages.
- - See if plugging in headphones will switch audio device as expected?
-  - Yes, it will. DONE!
- - See if a TRRS mic+headphones will work: DONE
 
 Git:
  - *** figure out how to adjust the colors for git diff.
@@ -36,8 +24,3 @@ Git:
     - The "added" color is dark.
     - ^ Need to figure out how to flip these.
 ^ this was done in last commit by adjusting the terminal colors.
-
-AwesomeWM:
- - Remove titles from windows. I don't need this :: DONE
- - Change themes to use the Solarized colors :: DONE
- - Add battery level to status bar :: DONE
