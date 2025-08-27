@@ -70,7 +70,7 @@ set $right l
 
 set $term alacritty
 set $personal_browser "firefox -P default-release"
-set $work_browser "firefox -P Work"
+set $work_browser "chromium --profile-directory='Profile 1' --enable-features=UseOzonePlatform --ozone-platform=wayland"
 
 ### Output configuration
 output * bg #000000 solid_color
@@ -81,6 +81,7 @@ output * bg #000000 solid_color
 # Basics:
 #
     bindsym $mod+Return exec $term
+    bindsym $mod+Shift+Return exec $term
     bindsym $mod+b exec $personal_browser
     bindsym $mod+Shift+b exec $work_browser
     bindsym $mod+Shift+q kill

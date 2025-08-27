@@ -51,7 +51,7 @@ Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
 let g:ycm_confirm_extra_conf = 0
 
 " Coc, for Python Completion and other things
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " ALE - Linting
 Plug 'w0rp/ale'
@@ -144,7 +144,7 @@ nmap <silent> K :call CocAction('doHover')<CR>
 " highlight CocWarningHighlight guifg=#ffaa00 guibg=NONE gui=underline ctermfg=Yellow ctermbg=black cterm=underline
 " highlight CocInfoHighlight guifg=#55aaff guibg=NONE gui=underline ctermfg=Red ctermbg=black cterm=underline
 " highlight CocHintHighlight guifg=#556655 guibg=NONE gui=underline ctermfg=blue ctermbg=black cterm=underline
-highlight CocInlayHint guifg=#888888 guibg=NONE gui=italic ctermfg=Gray ctermbg=NONE cterm=italic
+" highlight CocInlayHint guifg=#888888 guibg=NONE gui=italic ctermfg=Gray ctermbg=NONE cterm=italic
 
 "set foldmethod=indent
 nnoremap <space> za
