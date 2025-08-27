@@ -20,47 +20,100 @@ vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 vim.opt.smartindent = true
 vim.opt.termguicolors = true
+vim.opt.signcolumn = "yes:1"
 
+
+
+--
+-- Code Navigation
+--
+-- TODO:
+-- I tried a lot of these in Python, need to try Golang, Typescript and others.
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
+
+--
+-- List Function, Class and Methods in file
+--
+-- Attempt with Lspsaga...
+--vim.keymap.set('n', '<leader>o', '<cmd>Lspsaga outline<CR>', { desc = 'Show file outline' })
+-- Issues: lists all symbols, not just functions, classes and methods.
+-- Also, <enter> doesn't jump
+
+-- Attempt Symbols Outline ...
+vim.keymap.set('n', '<leader>o', '<cmd>SymbolsOutline<CR>', { desc = 'Show file outline' })
+-- This works, but lists all symbols.
+-- Need a way to filter types or something...
+-- Also, would be cool if it was more of a tree.
+
+--
+-- Goto Definition
+--
+vim.keymap.set('n', '<leader>d', '<cmd>Lspsaga goto_definition<CR>', { desc = 'Go to Definition' })
+-- Holy smokes, this works so well...
+
+
+--
+-- Get References
+--
+vim.keymap.set('n', '<leader>r', '<cmd>Lspsaga finder ref<CR>', { desc = 'Find References' })
+-- Works. Use "o" to open the file.
+-- Try this also:
+-- lazy.nvim: { "folke/trouble.nvim", cmd = "Trouble" }
+-- vim.keymap.set('n', '<leader>gr', '<cmd>Trouble lsp_references<CR>', { desc = 'Find References' })
+
+--
+-- Refactor
+--
+vim.keymap.set('n', '<leader>rn', '<cmd>Lspsaga rename<CR>', { desc = 'Rename Symbol' })
+-- Haven't tried this yet.
+
+
+-- TODO:
+-- Reportedly this needs to be like so:
+--
+--     -- LSP setup
+    -- local lspconfig = require("lspconfig")
+    -- local on_attach = function(client, bufnr)
+    --     -- Enable formatting
+    --     client.server_capabilities.documentFormattingProvider = true
+    --     -- Keybindings for LSP actions
+    --     local opts = { buffer = bufnr, desc = "LSP action" }
+    --     vim.keymap.set('n', '<leader>gd', '<cmd>Lspsaga goto_definition<CR>', opts)
+    --     vim.keymap.set('n', '<leader>gr', '<cmd>Lspsaga finder ref<CR>', opts)
+    --     vim.keymap.set('n', '<leader>rn', '<cmd>Lspsaga rename<CR>', opts)
+    -- end
+
+    -- lspconfig.ruff.setup { on_attach = on_attach }
+    -- lspconfig.pylsp.setup {
+    --     on_attach = on_attach,
+    --     settings = {
+    --         pylsp = {
+    --             plugins = {
+    --                 mypy = { enabled = true },
+    --             },
+    --         },
+    --     },
+    -- }
+    -- lspconfig.gopls.setup { on_attach = on_attach }
+    -- lspconfig.ts_ls.setup { on_attach = on_attach }
+
+    -- -- Ensure diagnostics don't update in insert mode
+    -- vim.diagnostic.config({ update_in_insert = false })
+    -- -- Lspsaga setup
+    -- require("lspsaga").setup({
+    --     ui = {
+    --         border = "rounded",
+    --         winblend = 10,
+    --  ..
+
+ 
 -- Load Lazy.nvim and plugins
 require("lazy").setup({
-    -- Solarized Color Scheme
-    -- { 
-    --     "craftzdog/solarized-osaka.nvim",
-    --     lazy = false, -- Load during startup
-    --     priority = 1000, -- Load before other plugins
-    --     config = function()
-    --         require("solarized-osaka").setup({
-    --             transparent = false, -- Optional: enable transparent background
-    --             styles = {
-    --                 floats = "transparent", -- Transparent floating windows
-    --                 sidebars = { "qf", "vista_kind", "terminal", "packer" },
-    --             },
-    --         })
-    --         vim.cmd([[colorscheme solarized-osaka]])
-    --         vim.api.nvim_set_hl(0, "Normal", { bg = "#000000" })
-    --         vim.api.nvim_set_hl(0, "NormalFloat", { bg = "#000000" })
-    --         vim.api.nvim_set_hl(0, "NonText", { bg = "#000000" })
-    --      end,
-    -- },
-    -- OneDark Color Scheme
-    {
-        "navarasu/onedark.nvim",
-        priority = 1000, -- make sure to load this before all the other start plugins
-        config = function()
-            require('onedark').setup {
-                --style = dark, darker, cool, deep, warm, warmer
-                style = 'darker'
-            }
-            -- Enable theme
-            require('onedark').load()
-            -- Force black background
-            vim.api.nvim_set_hl(0, "Normal", { bg = "#000000" })
-            vim.api.nvim_set_hl(0, "NormalFloat", { bg = "#000000" })
-            vim.api.nvim_set_hl(0, "NonText", { bg = "#000000" })
-        end,
-    },
     -- LSP core
     { "neovim/nvim-lspconfig" },
+    -- Symbol Tree
+    { "simrat39/symbols-outline.nvim", config = function() require("symbols-outline").setup() end },
     -- Autocompletion
     {
         "hrsh7th/nvim-cmp",
@@ -74,6 +127,23 @@ require("lazy").setup({
     {
         "nvim-treesitter/nvim-treesitter",
         build = ":TSUpdate",
+        config = function()
+            require("nvim-treesitter.configs").setup {
+                ensure_installed = { "python", "go", "typescript", "javascript", "tsx" },
+                highlight = { enable = true },
+                incremental_selection = { enable = true },
+                textobjects = {
+                    select = {
+                        enable = true,
+                        lookahead = true,
+                        keymaps = {
+                            ["af"] = "@function.outer",
+                            ["if"] = "@function.inner",
+                        },
+                    },
+                },
+            }
+        end,
     },
     -- Enhanced LSP UI
     { "nvimdev/lspsaga.nvim" },
@@ -138,23 +208,6 @@ cmp.setup({
     },
 })
 
--- Treesitter setup
-require("nvim-treesitter.configs").setup({
-    ensure_installed = { "python", "go", "typescript", "javascript", "tsx" },
-    highlight = { enable = true },
-    incremental_selection = { enable = true },
-    textobjects = {
-        select = {
-            enable = true,
-            lookahead = true,
-            keymaps = {
-                ["af"] = "@function.outer",
-                ["if"] = "@function.inner",
-            },
-        },
-    },
-})
-
 -- Lspsaga setup
 require("lspsaga").setup({
     ui = {
@@ -166,8 +219,17 @@ require("lspsaga").setup({
         max_height = 0.4,
     },
     diagnostic = {
-        -- on_insert = false, conos
         on_insert = false, -- Prevent diagnostic popups during typing
+        show_code_action = true,
+        show_source = true,
+    },
+    outline = {
+        auto_preview = true,
+        auto_close = true,
+        keys = {
+            jump = '<Enter>',
+            toggle_or_jump = 'o',
+        },
     },
 })
 
@@ -197,7 +259,11 @@ vim.api.nvim_create_autocmd("VimResized", {
 -- Lualine setup
 require("lualine").setup({
   options = {
-    theme = "solarized-osaka",
+    theme = "auto",
   },
 })
 
+-- Colorscheme. Must be at the end.
+vim.cmd.colorscheme('chromat')
+
+-- Fin
