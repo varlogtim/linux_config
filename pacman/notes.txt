@@ -1,0 +1,22 @@
+
+### Allowing full Desktop sharing:
+
+# Video/Audio sharing
+sudo pacman -S pipewire pipewire-pulse wireplumber
+
+# Desktop sharing
+sudo pacman -S xdg-desktop-portal xdg-desktop-portal-wlr
+
+# Ensure XDG_CURRENT_DESKTOP=sway and XDG_SESSION_TYPE=wayland are set
+
+Launch with Wayland: chromium --ozone-platform=wayland --enable-features=WaylandWindowDecorations (or edit desktop file).
+Go to chrome://flags/#enable-webrtc-pipewire-capturer (or edge://flags/), set to "Enabled", relaunch.
+Open teams.microsoft.com, join meeting, share screen—select entire screen.
+
+If black: Run systemctl --user restart xdg-desktop-portal xdg-desktop-portal-wlr.
+
+
+# Slack: (note: I wasn't able to get Slack to work because the version I was on wanted X11)
+Update to Slack 4.38.115+ (fixes Wayland black screens/crashes).
+
+If using desktop app (DEB/RPM/Snap/Flatpak), add --enable-features=WebRTCPipeWireCapturer to Exec line in ~/.local/share/applications/slack.desktop (copy from /usr/share/ first).
