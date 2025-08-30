@@ -1,4 +1,10 @@
 
+
+### Nerd Fonts:
+- Fonts Augmented with Glyphs.
+- See: https://github.com/ryanoasis/nerd-fonts/wiki/Glyph-Sets-and-Code-Points
+
+
 ### Allowing full Desktop sharing:
 
 # Video/Audio sharing
@@ -20,3 +26,17 @@ If black: Run systemctl --user restart xdg-desktop-portal xdg-desktop-portal-wlr
 Update to Slack 4.38.115+ (fixes Wayland black screens/crashes).
 
 If using desktop app (DEB/RPM/Snap/Flatpak), add --enable-features=WebRTCPipeWireCapturer to Exec line in ~/.local/share/applications/slack.desktop (copy from /usr/share/ first).
+
+####
+# Stopping Pipewire.
+
+systemctl --user disable pipewire pipewire-pulse pipewire.socket
+
+
+
+
+########
+# viewing media
+
+mpv - videos
+imv - displaying images
