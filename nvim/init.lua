@@ -151,6 +151,12 @@ require("lazy").setup({
     -- Status Line
     { "nvim-lualine/lualine.nvim", dependencies = { "nvim-tree/nvim-web-devicons" } },
 
+    -- Fzf - Fuzzy Finder
+    {
+        "ibhagwan/fzf-lua",
+        dependencies = { "nvim-tree/nvim-web-devicons" },  -- Optional for icons
+        opts = {},
+    },
 }, {
     performance = {
         rtp = {

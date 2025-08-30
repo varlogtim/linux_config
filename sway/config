@@ -20,7 +20,7 @@
 # Theme
 
 # Font
-font "Hack Nerd Font 18"
+font "Hack Nerd Font 20"
 default_border pixel 3
 
 # Colors
