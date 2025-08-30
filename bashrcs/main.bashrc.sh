@@ -18,9 +18,6 @@ alias topmem='top -bn1 -o%MEM | head -n 20'
 # - Figure out a sway bind to launch different terminals with different vars evaluated.
 #   - The use case here is that I want a key bind for my work dev environment.
 
-# Conda Envs
-alias dev311='conda activate dev-py3.11'
-
 # MLIS
 alias mlis="conda activate dev-py3.11; source $HOME/tmp/hpe/virtual_envs/aioli/bin/activate"
 alias dbrm_aioli="sudo rm -rf /home/ttucker/.postgres-aioli-test"
@@ -85,18 +82,4 @@ export TZ='America/New_York';
 # A better git log
 git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/ttucker/miniconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/home/ttucker/miniconda3/etc/profile.d/conda.sh" ]; then
-        . "/home/ttucker/miniconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="/home/ttucker/miniconda3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
 export XDG_CURRENT_DESKTOP=sway
