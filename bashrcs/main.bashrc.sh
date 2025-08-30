@@ -94,3 +94,4 @@ else
 fi
 unset __conda_setup
 # <<< conda initialize <<<
+export XDG_CURRENT_DESKTOP=sway

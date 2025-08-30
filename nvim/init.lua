@@ -12,6 +12,11 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+--
+-- TODO: TODO is colored strangly in other source files.
+--
+
+
 -- General Settings
 vim.opt.clipboard = "unnamedplus" -- Sync yanks with system clipboard
 vim.opt.number = true
@@ -231,6 +236,14 @@ require("lspsaga").setup({
             toggle_or_jump = 'o',
         },
     },
+    -- lightbulb = {
+    --     enable = true,
+    --     sign = true,
+    --     icon = 'g',
+    -- },
+    -- diagnostic = {
+    --     virtual_text = { prefix = 'd' },
+    -- }
 })
 
 -- Dynamic window scaling on resize
