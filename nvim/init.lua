@@ -17,108 +17,76 @@ vim.opt.rtp:prepend(lazypath)
 --
 
 
+--
 -- General Settings
-vim.opt.clipboard = "unnamedplus" -- Sync yanks with system clipboard
-vim.opt.number = true
-vim.opt.tabstop = 4
-vim.opt.shiftwidth = 4
-vim.opt.expandtab = true
-vim.opt.smartindent = true
-vim.opt.termguicolors = true
-vim.opt.signcolumn = "yes:1"
+--
+    vim.opt.clipboard = "unnamedplus" -- Sync yanks with system clipboard
+    vim.opt.number = true
+    vim.opt.tabstop = 4
+    vim.opt.shiftwidth = 4
+    vim.opt.expandtab = true
+    vim.opt.smartindent = true
+    vim.opt.termguicolors = true
+    vim.opt.signcolumn = "yes:1"
 
 
 
 --
 -- Code Navigation
 --
--- TODO:
--- I tried a lot of these in Python, need to try Golang, Typescript and others.
-vim.g.mapleader = " "
-vim.g.maplocalleader = " "
+    -- TODO:
+    -- I tried a lot of these in Python, need to try Golang, Typescript and others.
+    vim.g.mapleader = " "
+    vim.g.maplocalleader = " "
 
---
--- List Function, Class and Methods in file
---
--- Attempt with Lspsaga...
---vim.keymap.set('n', '<leader>o', '<cmd>Lspsaga outline<CR>', { desc = 'Show file outline' })
--- Issues: lists all symbols, not just functions, classes and methods.
--- Also, <enter> doesn't jump
+    --
+    -- List Function, Class and Methods in file
+    --
+    -- Attempt with Lspsaga...
+    --vim.keymap.set('n', '<leader>o', '<cmd>Lspsaga outline<CR>', { desc = 'Show file outline' })
+    -- Issues: lists all symbols, not just functions, classes and methods.
+    -- Also, <enter> doesn't jump
 
--- Attempt Symbols Outline ...
-vim.keymap.set('n', '<leader>o', '<cmd>SymbolsOutline<CR>', { desc = 'Show file outline' })
--- This works, but lists all symbols.
--- Need a way to filter types or something...
--- Also, would be cool if it was more of a tree.
+    -- Attempt Symbols Outline ...
+    vim.keymap.set('n', '<leader>o', '<cmd>SymbolsOutline<CR>', { desc = 'Show file outline' })
+    -- This works, but lists all symbols.
+    -- Need a way to filter types or something...
+    -- Also, would be cool if it was more of a tree.
 
---
--- Goto Definition
---
-vim.keymap.set('n', '<leader>d', '<cmd>Lspsaga goto_definition<CR>', { desc = 'Go to Definition' })
--- Holy smokes, this works so well...
-
-
---
--- Get References
---
-vim.keymap.set('n', '<leader>r', '<cmd>Lspsaga finder ref<CR>', { desc = 'Find References' })
--- Works. Use "o" to open the file.
--- Try this also:
--- lazy.nvim: { "folke/trouble.nvim", cmd = "Trouble" }
--- vim.keymap.set('n', '<leader>gr', '<cmd>Trouble lsp_references<CR>', { desc = 'Find References' })
-
---
--- Refactor
---
-vim.keymap.set('n', '<leader>rn', '<cmd>Lspsaga rename<CR>', { desc = 'Rename Symbol' })
--- Haven't tried this yet.
+    --
+    -- Goto Definition
+    --
+    vim.keymap.set('n', '<leader>d', '<cmd>Lspsaga goto_definition<CR>', { desc = 'Go to Definition' })
+    -- Holy smokes, this works so well...
 
 
--- TODO:
--- Reportedly this needs to be like so:
---
---     -- LSP setup
-    -- local lspconfig = require("lspconfig")
-    -- local on_attach = function(client, bufnr)
-    --     -- Enable formatting
-    --     client.server_capabilities.documentFormattingProvider = true
-    --     -- Keybindings for LSP actions
-    --     local opts = { buffer = bufnr, desc = "LSP action" }
-    --     vim.keymap.set('n', '<leader>gd', '<cmd>Lspsaga goto_definition<CR>', opts)
-    --     vim.keymap.set('n', '<leader>gr', '<cmd>Lspsaga finder ref<CR>', opts)
-    --     vim.keymap.set('n', '<leader>rn', '<cmd>Lspsaga rename<CR>', opts)
-    -- end
+    --
+    -- Get References
+    --
+    vim.keymap.set('n', '<leader>r', '<cmd>Lspsaga finder ref<CR>', { desc = 'Find References' })
+    -- Works. Use "o" to open the file.
+    -- Try this also:
+    -- lazy.nvim: { "folke/trouble.nvim", cmd = "Trouble" }
+    -- vim.keymap.set('n', '<leader>gr', '<cmd>Trouble lsp_references<CR>', { desc = 'Find References' })
 
-    -- lspconfig.ruff.setup { on_attach = on_attach }
-    -- lspconfig.pylsp.setup {
-    --     on_attach = on_attach,
-    --     settings = {
-    --         pylsp = {
-    --             plugins = {
-    --                 mypy = { enabled = true },
-    --             },
-    --         },
-    --     },
-    -- }
-    -- lspconfig.gopls.setup { on_attach = on_attach }
-    -- lspconfig.ts_ls.setup { on_attach = on_attach }
+    --
+    -- Refactor
+    --
+    vim.keymap.set('n', '<leader>=', '<cmd>Lspsaga rename<CR>', { desc = 'Rename Symbol' })
+    -- Haven't tried this yet.
 
-    -- -- Ensure diagnostics don't update in insert mode
-    -- vim.diagnostic.config({ update_in_insert = false })
-    -- -- Lspsaga setup
-    -- require("lspsaga").setup({
-    --     ui = {
-    --         border = "rounded",
-    --         winblend = 10,
-    --  ..
 
  
+--
 -- Load Lazy.nvim and plugins
+--
 require("lazy").setup({
     -- LSP core
     { "neovim/nvim-lspconfig" },
+
     -- Symbol Tree
     { "simrat39/symbols-outline.nvim", config = function() require("symbols-outline").setup() end },
+
     -- Autocompletion
     {
         "hrsh7th/nvim-cmp",
@@ -128,6 +96,7 @@ require("lazy").setup({
             "saadparwaiz1/cmp_luasnip",
         },
     },
+
     -- Syntax highlighting
     {
         "nvim-treesitter/nvim-treesitter",
@@ -150,12 +119,19 @@ require("lazy").setup({
             }
         end,
     },
+
     -- Enhanced LSP UI
     { "nvimdev/lspsaga.nvim" },
 
     -- Status Line
     { "nvim-lualine/lualine.nvim", dependencies = { "nvim-tree/nvim-web-devicons" } },
 
+    -- Fzf - Fuzzy Finder
+    {
+        "ibhagwan/fzf-lua",
+        dependencies = { "nvim-tree/nvim-web-devicons" },  -- Optional for icons
+        opts = {},
+    },
 }, {
     performance = {
         rtp = {
@@ -164,56 +140,42 @@ require("lazy").setup({
     },
 }) -- end lazy setup
 
+
+--
+-- Plugin Configuration
+--
+
 -- LSP setup
-local lspconfig = require("lspconfig")
--- Python: ruff for formatting, pylsp for mypy diagnostics
-lspconfig.ruff.setup {
-    on_attach = function(client, bufnr)
-        client.server_capabilities.documentFormattingProvider = true
-    end,
-}
-lspconfig.pylsp.setup {
-    settings = {
-        pylsp = {
-            plugins = {
-                mypy = { enabled = true }, -- Mypy for type checking
+    local lspconfig = require("lspconfig")
+    -- Python: ruff for formatting, pylsp for mypy diagnostics
+    lspconfig.ruff.setup {
+        on_attach = function(client, bufnr)
+            client.server_capabilities.documentFormattingProvider = true
+        end,
+    }
+    lspconfig.pylsp.setup {
+        settings = {
+            pylsp = {
+                plugins = {
+                    mypy = { enabled = true }, -- Mypy for type checking
+                },
             },
         },
-    },
-}
--- Go: gopls for LSP and formatting
-lspconfig.gopls.setup {
-    on_attach = function(client, bufnr)
-        client.server_capabilities.documentFormattingProvider = true
-    end,
-}
--- TypeScript/JS/React: ts_ls for LSP and formatting
-lspconfig.ts_ls.setup {
-    on_attach = function(client, bufnr)
-        client.server_capabilities.documentFormattingProvider = true
-    end,
-}
-
--- Autocompletion setup
-local cmp = require("cmp")
-cmp.setup({
-    snippet = {
-        expand = function(args)
-            require("luasnip").lsp_expand(args.body)
+    }
+    -- Go: gopls for LSP and formatting
+    lspconfig.gopls.setup {
+        on_attach = function(client, bufnr)
+            client.server_capabilities.documentFormattingProvider = true
         end,
-    },
-    mapping = cmp.mapping.preset.insert({
-        ["<CR>"] = cmp.mapping.confirm({ select = true }),
-        ["<Tab>"] = cmp.mapping.select_next_item(),
-        ["<S-Tab>"] = cmp.mapping.select_prev_item(),
-    }),
-    sources = {
-        { name = "nvim_lsp" },
-        { name = "luasnip" },
-    },
-})
+    }
+    -- TypeScript/JS/React: ts_ls for LSP and formatting
+    lspconfig.ts_ls.setup {
+        on_attach = function(client, bufnr)
+            client.server_capabilities.documentFormattingProvider = true
+        end,
+    }
 
--- Lspsaga setup
+-- Lspsaga UI setup
 require("lspsaga").setup({
     ui = {
         border = "rounded",
@@ -246,6 +208,25 @@ require("lspsaga").setup({
     -- }
 })
 
+-- Autocompletion setup
+local cmp = require("cmp")
+cmp.setup({
+    snippet = {
+        expand = function(args)
+            require("luasnip").lsp_expand(args.body)
+        end,
+    },
+    mapping = cmp.mapping.preset.insert({
+        ["<CR>"] = cmp.mapping.confirm({ select = true }),
+        ["<Tab>"] = cmp.mapping.select_next_item(),
+        ["<S-Tab>"] = cmp.mapping.select_prev_item(),
+    }),
+    sources = {
+        { name = "nvim_lsp" },
+        { name = "luasnip" },
+    },
+})
+
 -- Dynamic window scaling on resize
 vim.api.nvim_create_autocmd("VimResized", {
     callback = function()
@@ -267,6 +248,17 @@ vim.api.nvim_create_autocmd("VimResized", {
         })
     end,
 })
+
+--
+-- Fuzzy Finder
+--
+local fzf = require('fzf-lua')
+-- Search files in this directory
+vim.keymap.set('n', '<C-p>', fzf.files, { desc = "FzfLua: Find Files" })
+-- Live grep acorss files (uses ripgrep, maybe)
+vim.keymap.set('n', '<leader>fg', fzf.live_grep, { desc = "FzfLua: Live Grep" })
+vim.keymap.set('n', '<leader>fb', fzf.buffers, { desc = "FzfLua: Buffers" })
+vim.keymap.set('n', '<leader>fh', fzf.helptags, { desc = "FzfLua: Help Tags" })
 
 
 -- Lualine setup

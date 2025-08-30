@@ -38,6 +38,11 @@ export LD_LIBRARY_PATH=/usr/lib/modules/$(uname -r)/build/include/:/usr/lib/modu
 export LIBRARY_PATH=/usr/lib/modules/$(uname -r)/build/include/:/usr/lib/modules/$(uname -r)/build/arch/x86/include/:/usr/lib/modules/$(uname -r)/build/arch/x86/include/generated/:/usr/include/
 export C_INCLUDE=/usr/lib/modules/$(uname -r)/build/include/:/usr/lib/modules/$(uname -r)/build/arch/x86/include/:/usr/lib/modules/$(uname -r)/build/arch/x86/include/generated/:/usr/include/
 
+# FZF
+# Enable fzf key bindings
+source /usr/share/fzf/key-bindings.bash
+# Enable fzf completion
+source /usr/share/fzf/completion.bash
 
 # Functions
 FUNC_DIR=$HOME/thinkpad/tools/bash_funcs
