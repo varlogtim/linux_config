@@ -1,6 +1,13 @@
 # Emacs mode
 set -o emacs
 
+BASHRC_DIR=$(dirname "$(realpath "${BASH_SOURCE[0]}")")
+
+# Prompt
+if [ -f "${BASHRC_DIR}/prompt.bashrc.sh" ]; then
+    source "${BASHRC_DIR}/prompt.bashrc.sh"
+fi
+
 # Aliases
 alias ls='ls --color=always'
 alias cp='cp -v'
