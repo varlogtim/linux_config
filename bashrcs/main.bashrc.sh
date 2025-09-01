@@ -25,6 +25,11 @@ alias topmem='top -bn1 -o%MEM | head -n 20'
 # - Figure out a sway bind to launch different terminals with different vars evaluated.
 #   - The use case here is that I want a key bind for my work dev environment.
 
+# DirEnv
+if [ -x "$(command -v direnv)" ]; then
+    eval "$(direnv hook bash)"
+fi
+
 # MLIS
 alias mlis="conda activate dev-py3.11; source $HOME/tmp/hpe/virtual_envs/aioli/bin/activate"
 alias dbrm_aioli="sudo rm -rf /home/ttucker/.postgres-aioli-test"
