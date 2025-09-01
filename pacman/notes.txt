@@ -1,11 +1,21 @@
+###
+### Stuff about Pacman, packages and config
+###
+
+##########################################
+# TODO:
+# - Base package installation
+#   - So, I need a way to install all of the base dependencies for my setup.
+# - ???
 
 
 ### Nerd Fonts:
 - Fonts Augmented with Glyphs.
 - See: https://github.com/ryanoasis/nerd-fonts/wiki/Glyph-Sets-and-Code-Points
 
-
-### Allowing full Desktop sharing:
+##########################################
+# Allowing full Desktop sharing:
+#
 
 # Video/Audio sharing
 sudo pacman -S pipewire pipewire-pulse wireplumber
@@ -27,16 +37,34 @@ Update to Slack 4.38.115+ (fixes Wayland black screens/crashes).
 
 If using desktop app (DEB/RPM/Snap/Flatpak), add --enable-features=WebRTCPipeWireCapturer to Exec line in ~/.local/share/applications/slack.desktop (copy from /usr/share/ first).
 
-####
 # Stopping Pipewire.
 
 systemctl --user disable pipewire pipewire-pulse pipewire.socket
 
 
-
-
-########
-# viewing media
+##########################################
+# Viewing Media
 
 mpv - videos
 imv - displaying images
+
+
+##########################################
+# Environment Related
+
+##########
+# direnv
+# This is to setup different environments in different source directories.
+pacman -S direnv
+
+# setup:
+
+1. Create a .envrc file inside of the directory you want.
+- for my example, to change into a specific python venv:
+$ cat .envrc
+source .venv/bin/activate
+2. direnv allow
+3. Then changing in and out of the dir automatically loads/unloads the virtual env.
+
+
+
