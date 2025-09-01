@@ -8,6 +8,11 @@ if [ -f "${BASHRC_DIR}/prompt.bashrc.sh" ]; then
     source "${BASHRC_DIR}/prompt.bashrc.sh"
 fi
 
+# Work Aliases
+if [ -f "${BASHRC_DIR}/work.bashrc.sh" ]; then
+    source "${BASHRC_DIR}/work.bashrc.sh"
+fi
+
 # Aliases
 alias ls='ls --color=always'
 alias cp='cp -v'
@@ -30,14 +35,10 @@ if [ -x "$(command -v direnv)" ]; then
     eval "$(direnv hook bash)"
 fi
 
-# MLIS
-alias mlis="conda activate dev-py3.11; source $HOME/tmp/hpe/virtual_envs/aioli/bin/activate"
-alias dbrm_aioli="sudo rm -rf /home/ttucker/.postgres-aioli-test"
-
 # Browser
 export BROWSER="/usr/bin/firefox"
 
-# Variables
+# Editors
 export CSCOPE_EDITOR=/usr/bin/vim
 export EDITOR=/usr/bin/vim
 
@@ -52,14 +53,6 @@ export C_INCLUDE=/usr/lib/modules/$(uname -r)/build/include/:/usr/lib/modules/$(
 source /usr/share/fzf/key-bindings.bash
 # Enable fzf completion
 source /usr/share/fzf/completion.bash
-
-# Functions
-FUNC_DIR=$HOME/thinkpad/tools/bash_funcs
-if [ -f $FUNC_DIR ]; then 
-    for f in $FUNC_DIR/*; do
-        source $f
-    done
-fi
 
 # bash-completion
 BASH_COMPLETION='/usr/share/bash-completion/bash_completion'
