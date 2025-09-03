@@ -8,25 +8,28 @@
 #    - Include each section in the main config.
 #    - Investigate ways of generating the different sections of the config.
 #    - Potentially using "configparser" package from Python.
+#  - Additionally, there are some host specific sections, such as "output"
 
 
 # TODO LIST:
 # - Update titles
 # - There is something about the title bars, maybe
+#   - padding, I think
 # - 12 different gray levels
 # - Need keybind for taking screen shots.
+# - 
 
 
 # Output
 output DP-1 mode 3840x2160@60Hz
 output DP-1 adaptive_sync on
 
-###########
-# Screen shotting
+##########################################
+# Screen shotting and sharing
 exec /usr/lib/xdg-desktop-portal-wlr
 exec /usr/lib/xdg-desktop-portal
 
-###########
+##########################################
 # Theme
 
 # Font
@@ -64,11 +67,14 @@ set $bg_frame   $brbg
 
 # Borders and colors
 #                       border      background  text        indicator   child_border
-client.focused          $black      $cyan       $fg_text    $yellow     $fg_frame
+client.focused          $black      $blue       $fg_text    $yellow     $fg_frame
 client.focused_inactive $bg_frame   $black      $bg_text    $yellow     $bg_frame
 client.unfocused        $bg_frame   $black      $bg_text    $yellow     $bg_frame
 client.urgent           $bg_frame   $brred      $bg_text    $yellow     $bg_frame
 
+
+### Background color
+output * bg $bg solid_color
 
 ### Variables
 set $mod Mod4
@@ -81,9 +87,6 @@ set $right l
 set $term alacritty
 set $personal_browser "firefox -P default-release"
 set $work_browser "chromium --profile-directory='Profile 1' --enable-features=UseOzonePlatform --ozone-platform=wayland --enable-features=WaylandWindowDecorations"
-
-### Output configuration
-output * bg #000000 solid_color
 
 
 ### Key bindings
@@ -287,8 +290,29 @@ exec wl-paste --primary --type text --watch sh -c "wl-paste --primary --no-newli
 # the selection of an entry from our clipboard history and places it in the Regular Clipboard.
 bindsym $mod+Ctrl+p exec sh -c 'cliphist list | wofi -S dmenu | cliphist decode | wl-copy'
 
+##########################################
+# Notifications
+#
+# TODO:
+# - I have no idea what is producing notifications right now.
+# - Considering the following two UXs:
+#   1. A 100%h, 20%w right alighned on-top window which lists
+#      my notifications and allows key-commands to goto event
+#      or dismiss.
+#   2. A notification icon with alert count. A key command which
+#      pulls up a floating window with alert contents. This is
+#      actually probably better... maybe...
+#
 
-## Status Bar:
+
+
+##########################################
+# Status Bar:
+#
+# TODO:
+# - Sound level, mute/unmute
+# - Network adapters connected, public IP.
+# 
 # Read `man 5 sway-bar` for more information about this section.
 bar {
     position top
