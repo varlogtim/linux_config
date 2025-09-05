@@ -36,12 +36,20 @@ exec /usr/lib/xdg-desktop-portal
 font "Hack Nerd Font 18"
 default_border pixel 3
 
+##################
 # Colors
-set $bg     #000000
-set $brbg   #212121
-set $fg     #bcbcbc
+# Grays
+set $color_gr0 #000000
+set $color_gr1 #1f1f1f
+set $color_gr2 #3f3f3f
+set $color_gr3 #5f5f5f
+set $color_gr4 #7f7f7f
+set $color_gr5 #9f9f9f
+set $color_gr6 #bfbfbf
+set $color_gr7 #dfdfdf
 
-set $black      #3c3c3c
+# 8 terminal colors
+set $black      $color_gr1
 set $red        #8a0000
 set $green      #4d6e00
 set $yellow     #7d6000
@@ -50,7 +58,8 @@ set $magenta    #7d0045
 set $cyan       #007d7d
 set $white      #d7d7af
 
-set $brblack    #575757
+# 8 bright terminal colors
+set $brblack    #color_gr3
 set $brred      #d70000
 set $brgreen    #5f8700
 set $bryellow   #af8700
@@ -59,17 +68,21 @@ set $brmagenta  #af005f
 set $brcyan     #00afaf
 set $brwhite    #ffffd7
 
+set $bg     $color_gr0
+set $brbg   $color_gr1
+set $fg     $white
+
 # Abstracted colors
 set $fg_text    $brwhite
 set $bg_text    $white
-set $fg_frame   $black
-set $bg_frame   $brbg
+set $fg_frame   $color_gr3
+set $bg_frame   $color_gr1
 
 # Borders and colors
 #                       border      background  text        indicator   child_border
-client.focused          $black      $blue       $fg_text    $yellow     $fg_frame
-client.focused_inactive $bg_frame   $black      $bg_text    $yellow     $bg_frame
-client.unfocused        $bg_frame   $black      $bg_text    $yellow     $bg_frame
+client.focused          $brblue     $blue       $fg_text    $yellow     $color_gr2
+client.focused_inactive $bg_frame   $color_gr2  $bg_text    $yellow     $bg_frame
+client.unfocused        $bg_frame   $color_gr2  $bg_text    $yellow     $bg_frame
 client.urgent           $bg_frame   $brred      $bg_text    $yellow     $bg_frame
 
 
