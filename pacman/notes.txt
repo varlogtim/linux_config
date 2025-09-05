@@ -68,3 +68,13 @@ source .venv/bin/activate
 
 
 
+
+##########################################
+# NeoVim Plugins
+#
+
+###########
+# Pyright
+# MS makes this but it is MIT license and faster than Jedi
+
+pacman -S pyright
