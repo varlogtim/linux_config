@@ -147,17 +147,15 @@ require("lazy").setup({
 
 -- LSP setup
     local lspconfig = require("lspconfig")
-    -- Python: ruff for formatting, pylsp for mypy diagnostics
-    lspconfig.ruff.setup {
-        on_attach = function(client, bufnr)
-            client.server_capabilities.documentFormattingProvider = true
-        end,
-    }
-    lspconfig.pylsp.setup {
+    -- Python: Pyright for code completion, goto def, etc.
+    lspconfig.pyright.setup {
         settings = {
-            pylsp = {
-                plugins = {
-                    mypy = { enabled = true }, -- Mypy for type checking
+            python = {
+                analysis = {
+                    autoSearchPaths = true,
+                    diagnosticMode = "openFilesOnly",
+                    useLibraryCodeForTypes = true,
+                    typeCheckingMode = "basic",
                 },
             },
         },
