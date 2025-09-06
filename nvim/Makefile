@@ -6,8 +6,11 @@ install:
 
 .PHONY: get-deps
 get-deps:
-	pip install ruff ruff-lsp
-	pip install python-lsp-server[all]
-	pip install neovim-remote
-	go install golang.org/x/tools/gopls@latest
-	npm install -g typescript-language-server eslint prettier pyright
+	# TODO: Should look at these requirements
+	# I don't like global python, npm, and golang things being installed.
+	# Perhaps I should create a story about creating a global versions of these.
+	sudo pacman -S pyright
+	#pip install python-lsp-server[all]
+	#pip install neovim-remote
+	#go install golang.org/x/tools/gopls@latest
+	#npm install -g typescript-language-server eslint prettier

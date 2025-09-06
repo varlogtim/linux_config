@@ -322,28 +322,10 @@ bindsym $mod+Ctrl+p exec sh -c 'cliphist list | wofi -S dmenu | cliphist decode 
 ##########################################
 # Status Bar:
 #
-# TODO:
-# - Sound level, mute/unmute
-# - Network adapters connected, public IP.
-# 
-# Read `man 5 sway-bar` for more information about this section.
+# See Makefile in ../waybar/
 bar {
-    position top
-    font "Hack Nerd Font 18"
-
-    # When the status_command prints a new line to stdout, swaybar updates.
-    # The default just shows the current date and time.
-    status_command while date +'%Y-%m-%d %X'; do sleep 1; done
-    colors {
-        statusline $fg
-        background $brbg
-        #                   boarder     background  text
-        focused_workspace   $cyan       $cyan       $fg_text
-        inactive_workspace  $black      $black      $white
-        urgent_workspace    $red        $brred      $white
-    }
+    swaybar_command waybar
 }
-
 
 
 include /etc/sway/config.d/*
