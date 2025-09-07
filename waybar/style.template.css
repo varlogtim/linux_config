@@ -1,13 +1,12 @@
 * {
-    /* `otf-font-awesome` is required to be installed for icons */
-    font-family: FontAwesome, Roboto, Helvetica, Arial, sans-serif;
-    font-size: 13px;
+    font-family: "Hack Nerd Font", FontAwesome;
+    font-size: 24px;
 }
 
 window#waybar {
-    background-color: rgba(43, 48, 59, 0.5);
+    background-color: #5f5f5f;
     border-bottom: 3px solid rgba(100, 114, 125, 0.5);
-    color: #ffffff;
+    color: #ffffd7;
     transition-property: background-color;
     transition-duration: .5s;
 }
@@ -16,17 +15,8 @@ window#waybar.hidden {
     opacity: 0.2;
 }
 
-/*
-window#waybar.empty {
-    background-color: transparent;
-}
-window#waybar.solo {
-    background-color: #FFFFFF;
-}
-*/
-
 window#waybar.termite {
-    background-color: #3F3F3F;
+    background-color: #3f3f3f;
 }
 
 window#waybar.chromium {
@@ -35,28 +25,25 @@ window#waybar.chromium {
 }
 
 button {
-    /* Use box-shadow instead of border so the text isn't offset */
     box-shadow: inset 0 -3px transparent;
-    /* Avoid rounded borders under each button name */
     border: none;
     border-radius: 0;
 }
 
-/* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
 button:hover {
     background: inherit;
     box-shadow: inset 0 -3px #ffffff;
 }
 
-/* you can set a style on hover for any module like this */
 #pulseaudio:hover {
     background-color: #a37800;
 }
 
 #workspaces button {
-    padding: 0 5px;
+    padding: 0 5px 0 0;
     background-color: transparent;
-    color: #ffffff;
+    color: #ffffd7;
+    min-width: 45px;
 }
 
 #workspaces button:hover {
@@ -77,38 +64,19 @@ button:hover {
     box-shadow: inset 0 -3px #ffffff;
 }
 
-#clock,
-#battery,
-#cpu,
-#memory,
-#disk,
-#temperature,
-#backlight,
-#network,
-#pulseaudio,
-#wireplumber,
-#custom-media,
-#tray,
-#mode,
-#idle_inhibitor,
-#scratchpad,
-#power-profiles-daemon,
-#mpd {
+#clock, #battery, #cpu, #memory, #disk, #temperature, #backlight, #network, #pulseaudio, #wireplumber, #custom-media, #tray, #mode, #idle_inhibitor, #scratchpad, #power-profiles-daemon, #mpd {
     padding: 0 10px;
-    color: #ffffff;
+    color: #ffffd7;
 }
 
-#window,
-#workspaces {
+#window, #workspaces {
     margin: 0 4px;
 }
 
-/* If workspaces is the leftmost module, omit left margin */
 .modules-left > widget:first-child > #workspaces {
     margin-left: 0;
 }
 
-/* If workspaces is the rightmost module, omit right margin */
 .modules-right > widget:last-child > #workspaces {
     margin-right: 0;
 }
@@ -118,26 +86,25 @@ button:hover {
 }
 
 #battery {
-    background-color: #ffffff;
-    color: #000000;
+    background-color: #ffffd7;
+    color: #1f1f1f;
 }
 
 #battery.charging, #battery.plugged {
-    color: #ffffff;
+    color: #ffffd7;
     background-color: #26A65B;
 }
 
 @keyframes blink {
     to {
-        background-color: #ffffff;
-        color: #000000;
+        background-color: #ffffd7;
+        color: #1f1f1f;
     }
 }
 
-/* Using steps() instead of linear as a timing function to limit cpu usage */
 #battery.critical:not(.charging) {
     background-color: #f53c3c;
-    color: #ffffff;
+    color: #ffffd7;
     animation-name: blink;
     animation-duration: 0.5s;
     animation-timing-function: steps(12);
@@ -151,26 +118,26 @@ button:hover {
 
 #power-profiles-daemon.performance {
     background-color: #f53c3c;
-    color: #ffffff;
+    color: #ffffd7;
 }
 
 #power-profiles-daemon.balanced {
     background-color: #2980b9;
-    color: #ffffff;
+    color: #ffffd7;
 }
 
 #power-profiles-daemon.power-saver {
     background-color: #2ecc71;
-    color: #000000;
+    color: #1f1f1f;
 }
 
 label:focus {
-    background-color: #000000;
+    background-color: #1f1f1f;
 }
 
 #cpu {
     background-color: #2ecc71;
-    color: #000000;
+    color: #1f1f1f;
 }
 
 #memory {
@@ -195,7 +162,7 @@ label:focus {
 
 #pulseaudio {
     background-color: #f1c40f;
-    color: #000000;
+    color: #1f1f1f;
 }
 
 #pulseaudio.muted {
@@ -205,7 +172,7 @@ label:focus {
 
 #wireplumber {
     background-color: #fff0f5;
-    color: #000000;
+    color: #1f1f1f;
 }
 
 #wireplumber.muted {
@@ -283,7 +250,7 @@ label:focus {
 
 #keyboard-state {
     background: #97e1ad;
-    color: #000000;
+    color: #1f1f1f;
     padding: 0 0px;
     margin: 0 5px;
     min-width: 16px;
@@ -302,7 +269,7 @@ label:focus {
 }
 
 #scratchpad.empty {
-	background-color: transparent;
+    background-color: transparent;
 }
 
 #privacy {
@@ -311,7 +278,7 @@ label:focus {
 
 #privacy-item {
     padding: 0 5px;
-    color: white;
+    color: #ffffd7;
 }
 
 #privacy-item.screenshare {
