@@ -3,6 +3,10 @@
 # TODO: I am going to have color palettes that I would like to exist
 # across multiple configs. Therefore, I should read the color palette
 # and populate the configs with those colors.
+#
+MAKEFLAGS += --no-print-directory
+
+
 .PHONY: install-hack-nerd-font
 install-hack-nerd-font:
 	@mkdir -p /tmp/hack-nerd-font
@@ -29,9 +33,13 @@ install-vim:
 install-sway:
 	echo impl me
 
-.PHONY: install-%
-install-%:
-	$(MAKE) -C $* install
+.PHONY: config-install
+config-install: config-install-alacritty config-install-waybar
+
+.PHONY: config-install-%
+config-install-%:
+	$(MAKE) -C $* config-install
+
 
 base:
 	mkdir -v ~/.config
