@@ -147,7 +147,9 @@ require("lazy").setup({
 
 -- LSP setup
     local lspconfig = require("lspconfig")
+
     -- Python: Pyright for code completion, goto def, etc.
+    -- TODO: Errors are indicated, but not displayed.
     lspconfig.pyright.setup {
         settings = {
             python = {
@@ -267,6 +269,6 @@ require("lualine").setup({
 })
 
 -- Colorscheme. Must be at the end.
-vim.cmd.colorscheme('chromat')
+vim.cmd.colorscheme('${theme_name}')
 
 -- Fin
