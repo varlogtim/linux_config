@@ -34,7 +34,7 @@ install-sway:
 	echo impl me
 
 .PHONY: config-install
-config-install: config-install-sway config-install-alacritty config-install-waybar
+config-install: config-install-nvim config-install-sway config-install-alacritty config-install-waybar
 
 .PHONY: config-install-%
 config-install-%:
