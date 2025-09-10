@@ -20,6 +20,7 @@ alias ct='ctags -R -o ~/.cache/ctags ./'
 alias k='kubectl'
 alias dt='date +"%Y%m%dT%H%M%S"'
 alias topmem='top -bn1 -o%MEM | head -n 20'
+alias wlc='wl-copy'
 
 # TODO:
 # - Break specific components out into separate bashrc files and/or functions.
