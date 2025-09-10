@@ -259,13 +259,16 @@ vim.keymap.set('n', '<C-p>', fzf.files, { desc = "FzfLua: Find Files" })
 vim.keymap.set('n', '<leader>fg', fzf.live_grep, { desc = "FzfLua: Live Grep" })
 vim.keymap.set('n', '<leader>fb', fzf.buffers, { desc = "FzfLua: Buffers" })
 vim.keymap.set('n', '<leader>fh', fzf.helptags, { desc = "FzfLua: Help Tags" })
-
+vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = "Open diagnostics list" })
 
 -- Lualine setup
 require("lualine").setup({
-  options = {
-    theme = "auto",
-  },
+    sections = {
+        lualine_c = { { 'diagnostics', sources = { 'nvim_lsp' } } }
+    }, -- Not sure why this doesn't work.
+    options = {
+        theme = "auto",
+    },
 })
 
 -- Colorscheme. Must be at the end.
