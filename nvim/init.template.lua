@@ -14,6 +14,7 @@ vim.opt.rtp:prepend(lazypath)
 
 --
 -- TODO: TODO is colored strangly in other source files.
+-- - Need to look into Spellsitter (for spelling checking)
 --
 
 
@@ -29,7 +30,9 @@ vim.opt.rtp:prepend(lazypath)
     vim.opt.termguicolors = true
     vim.opt.signcolumn = "yes:1"
 
-
+-- Operations:
+-- - Expanding setting correct tab width: select text in vision mode, the hit =, bam!
+--
 
 --
 -- Code Navigation
@@ -261,15 +264,69 @@ vim.keymap.set('n', '<leader>fb', fzf.buffers, { desc = "FzfLua: Buffers" })
 vim.keymap.set('n', '<leader>fh', fzf.helptags, { desc = "FzfLua: Help Tags" })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = "Open diagnostics list" })
 
--- Lualine setup
+------------------------------------------
+-- Lualine Setup
+--
+-- Sections:
+-- - Sections are lists of components.
+-- - A section is one of lualine_?
+--   - a, b, c (the left sections)
+--   - x, y, z (the right sections)
+--
+-- - sections is the main ... I actually have no idea.
+-- - tabline is Global, for all windows.
+-- - winbar is per window. (splitv, split?)
+--
 require("lualine").setup({
-    sections = {
-        lualine_c = { { 'diagnostics', sources = { 'nvim_lsp' } } }
-    }, -- Not sure why this doesn't work.
     options = {
+        icons_enabled = true,
         theme = "auto",
+        component_separators = { left = "", right = "" },
+        section_separators = { left = "", right = "" },
+        disabled_filetypes = { statusline = {}, winbar = {} },
+        ignore_focus = {},
+        always_divide_middle = true,
+        globalstatus = false,
+        refresh = { statusline = 1000, tabline = 1000, winbar = 1000 },
+        always_show_tabline = true,
     },
+    sections = {
+        lualine_a = { "mode" },
+        lualine_b = { "diff", "diagnostics" }, -- "branch"
+        lualine_c = { "filename" },
+        lualine_x = { "encoding", "fileformat", {"filetype", icon_only = true} },
+        lualine_y = { "progress" },
+        lualine_z = { "location" },
+    },
+    inactive_sections = {
+        lualine_a = {},
+        lualine_b = {},
+        lualine_c = { "filename" },
+        lualine_x = { "location" },
+        lualine_y = {},
+        lualine_z = {},
+    },
+   -- tabline = {},
+    tabline = {
+        lualine_a = { "buffers" },  -- filetype icon, filename
+        lualine_b = { "branch" },
+        lualine_c = { "filename" },
+        lualine_z = { "windows" },
+    },
+    winbar = {},
+    inactive_winbar = {},
+    extensions = {},
 })
+-- require("lualine").setup({
+--   options = {
+--     theme = "auto",
+--     icons_enabled = true,
+--   },
+--   sections = {
+--     lualine_c = { { "diagnostics", sources = { "nvim_lsp" } } },
+--     lualine_x = { { "filetype", icon_only = true } },
+--   },
+-- })
 
 -- Colorscheme. Must be at the end.
 vim.cmd.colorscheme('${theme_name}')
