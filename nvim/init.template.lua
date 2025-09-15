@@ -15,7 +15,7 @@ vim.opt.rtp:prepend(lazypath)
 --
 -- TODO: TODO is colored strangly in other source files.
 -- - Need to look into Spellsitter (for spelling checking)
---
+-- - Need to enable golangci-lint lint for golang.
 
 
 --
