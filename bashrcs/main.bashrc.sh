@@ -38,13 +38,22 @@ export C_INCLUDE=/usr/lib/modules/$(uname -r)/build/include/:/usr/lib/modules/$(
 # Global Environment Setup
 #
 
-# bash-completion
+### bash-completion
 BASH_COMPLETION='/usr/share/bash-completion/bash_completion'
 if [ -e ${BASH_COMPLETION} ]; then
     source ${BASH_COMPLETION}
 fi
 
-# Fuzzy Finder
+### Bash History
+HISTSIZE=100  # commands in memory
+HISTFILESIZE=100000  # commands in history file.
+# NOTE: fzf searches the history file, so no need to increase in memory histsize.
+shopt -s histappend  # append to HISTFILE instead of overwriting.
+# Hack to merge history across terminals.
+# NOTE: a command has to be run in the terminal in order for them to sync.
+PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
+
+### Fuzzy Finder
 if [ -e /usr/share/fzf/key-bindings.bash ]; then
     source /usr/share/fzf/key-bindings.bash
 fi
@@ -52,12 +61,12 @@ if [ -e /usr/share/fzf/completion.bash ]; then
     source /usr/share/fzf/completion.bash
 fi
 
-# Direnv
+### Direnv
 if [ -x "$(command -v direnv)" ]; then
     eval "$(direnv hook bash)"
 fi
 
-# Git Config (TODO: look into a better way of setting that or isolating thise)
+### Git Config (TODO: look into a better way of setting that or isolating thise)
 git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 git config --global alias lg-tag "log --color --graph  --tags --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 git config --global core.editor "nvim"
