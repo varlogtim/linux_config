@@ -308,7 +308,9 @@ require("lualine").setup({
     },
    -- tabline = {},
     tabline = {
-        lualine_a = { "buffers" },  -- filetype icon, filename
+        -- lualine_a = { "buffers" },  -- filetype icon, filename
+        -- When a file is opened, then another one after, it appends to this buffer.
+        -- Not really sure how to move through the buffer, or if I even want to.
         lualine_b = { "branch" },
         lualine_c = { "filename" },
         lualine_z = { "windows" },
