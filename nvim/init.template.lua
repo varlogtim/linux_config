@@ -29,6 +29,7 @@ vim.opt.rtp:prepend(lazypath)
     vim.opt.smartindent = true
     vim.opt.termguicolors = true
     vim.opt.signcolumn = "yes:1"
+    vim.keymap.set('n', '<leader>h', ':noh<CR>', { desc = "Remove highting after search" })
 
 -- Operations:
 -- - Expanding setting correct tab width: select text in vision mode, the hit =, bam!
