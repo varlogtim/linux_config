@@ -13,9 +13,12 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 --
--- TODO: TODO is colored strangly in other source files.
+-- TODO: TODO is colored strangely in other source files.
 -- - Need to look into Spellsitter (for spelling checking)
 -- - Need to enable golangci-lint lint for golang.
+-- - Looking into treesitter settings:
+--   - incremental_selection: more configuring...
+--   - textobjects: the bindings do not work for selecting functions in visual mode.
 
 
 --
@@ -29,6 +32,8 @@ vim.opt.rtp:prepend(lazypath)
     vim.opt.smartindent = true
     vim.opt.termguicolors = true
     vim.opt.signcolumn = "yes:1"
+    vim.opt.spell = true
+    vim.opt.spelllang = "en_us"
     vim.keymap.set('n', '<leader>h', ':noh<CR>', { desc = "Remove highting after search" })
 
 -- Operations:
@@ -105,23 +110,6 @@ require("lazy").setup({
     {
         "nvim-treesitter/nvim-treesitter",
         build = ":TSUpdate",
-        config = function()
-            require("nvim-treesitter.configs").setup {
-                ensure_installed = { "python", "go", "typescript", "javascript", "tsx" },
-                highlight = { enable = true },
-                incremental_selection = { enable = true },
-                textobjects = {
-                    select = {
-                        enable = true,
-                        lookahead = true,
-                        keymaps = {
-                            ["af"] = "@function.outer",
-                            ["if"] = "@function.inner",
-                        },
-                    },
-                },
-            }
-        end,
     },
 
     -- Enhanced LSP UI
@@ -231,6 +219,27 @@ cmp.setup({
     },
 })
 
+-- Treesitter Setup
+require("nvim-treesitter.configs").setup({
+    ensure_installed = { "python", "go", "typescript", "javascript", "tsx", "lua" },
+    highlight = {
+        enable = true,
+        additional_vim_regex_highlighting = false,
+    },
+    incremental_selection = { enable = true },
+    textobjects = {
+        select = {
+            enable = true,
+            lookahead = true,
+            keymaps = {
+                ["af"] = "@function.outer",
+                ["if"] = "@function.inner",
+            },
+        },
+    },
+})
+
+
 -- Dynamic window scaling on resize
 vim.api.nvim_create_autocmd("VimResized", {
     callback = function()
@@ -259,7 +268,7 @@ vim.api.nvim_create_autocmd("VimResized", {
 local fzf = require('fzf-lua')
 -- Search files in this directory
 vim.keymap.set('n', '<C-p>', fzf.files, { desc = "FzfLua: Find Files" })
--- Live grep acorss files (uses ripgrep, maybe)
+-- Live grep across files (uses ripgrep, maybe)
 vim.keymap.set('n', '<leader>fg', fzf.live_grep, { desc = "FzfLua: Live Grep" })
 vim.keymap.set('n', '<leader>fb', fzf.buffers, { desc = "FzfLua: Buffers" })
 vim.keymap.set('n', '<leader>fh', fzf.helptags, { desc = "FzfLua: Help Tags" })
@@ -307,7 +316,7 @@ require("lualine").setup({
         lualine_y = {},
         lualine_z = {},
     },
-   -- tabline = {},
+    -- tabline = {},
     tabline = {
         -- lualine_a = { "buffers" },  -- filetype icon, filename
         -- When a file is opened, then another one after, it appends to this buffer.
