@@ -1,0 +1,29 @@
+# Default lsd configuration
+classic: false
+blocks:
+  - permission
+  - user
+  - group
+  - size
+  - date
+  - name
+date: relative
+sorting:
+  column: name
+  reverse: false
+  dir-grouping: first
+total-size: false
+hyperlink: never
+icons:
+  when: auto
+  theme: fancy
+  separator: " "
+color:
+  when: auto
+  theme: default
+layout: grid
+size: default
+permission: rwx
+dereference: false
+no-symlink: false
+ignore-globs: []

@@ -67,6 +67,8 @@ source .venv/bin/activate
 3. Then changing in and out of the dir automatically loads/unloads the virtual env.
 
 
+# LSD a better ls.
+
 
 
 ##########################################
