@@ -1,0 +1,57 @@
+# Custom themes for lsd
+dark:
+  user: 33 # Blue
+  group: 32 # Green
+  permission:
+    read: 34 # Blue
+    write: 33 # Yellow
+    exec: 31 # Red
+    exec-sticky: 35 # Magenta
+    no-access: 90 # Grey
+    octal: 36 # Cyan
+    acl: 36 # Cyan
+    context: 36 # Cyan
+  date:
+    hour-old: 36 # Cyan
+    day-old: 32 # Green
+    older: 34 # Blue
+  size:
+    none: 90 # Grey
+    small: 32 # Green
+    medium: 33 # Yellow
+    large: 31 # Red
+  inode:
+    valid: 36 # Cyan
+    invalid: 90 # Grey
+  links:
+    valid: 36 # Cyan
+    invalid: 90 # Grey
+  tree-edge: 90 # Grey
+light:
+  user: 94 # Light blue
+  group: 92 # Light green
+  permission:
+    read: 94 # Light blue
+    write: 93 # Light yellow
+    exec: 91 # Light red
+    exec-sticky: 95 # Light magenta
+    no-access: 37 # White
+    octal: 96 # Light cyan
+    acl: 96 # Light cyan
+    context: 96 # Light cyan
+  date:
+    hour-old: 96 # Light cyan
+    day-old: 92 # Light green
+    older: 94 # Light blue
+  size:
+    none: 37 # White
+    small: 92 # Light green
+    medium: 93 # Light yellow
+    large: 91 # Light red
+  inode:
+    valid: 96 # Light cyan
+    invalid: 37 # White
+  links:
+    valid: 96 # Light cyan
+    invalid: 37 # White
+  tree-edge: 37 # White

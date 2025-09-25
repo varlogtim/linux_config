@@ -10,7 +10,11 @@ export EDITOR=/usr/bin/vim
 export TERMINFO="/usr/share/terminfo"
 
 # Aliases
-alias ls='ls --color=always'
+if command -v lsd >/dev/null 2>&1; then
+    alias ls='lsd'
+else
+    alias ls='ls --color=always'
+fi
 alias cp='cp -v'
 alias mv='mv -v'
 alias rm='rm -iv'
