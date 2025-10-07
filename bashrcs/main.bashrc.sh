@@ -8,6 +8,7 @@ export BROWSER="/usr/bin/firefox"
 export CSCOPE_EDITOR=/usr/bin/vim
 export EDITOR=/usr/bin/vim
 export TERMINFO="/usr/share/terminfo"
+export KUBE_EDITOR="nvim"
 
 # Aliases
 if command -v lsd >/dev/null 2>&1; then
