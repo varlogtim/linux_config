@@ -102,7 +102,8 @@ export PATH=$HOME/bin:$PATH
 export PATH=/usr/lib/jvm/java-11-openjdk/bin/:$PATH
 export PATH=$HOME/.local/bin:$PATH
 
-
+# Krew (kubectl plugins)
+export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 
 ##########################################
 # Extended Bashrcs:

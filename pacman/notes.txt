@@ -70,6 +70,11 @@ source .venv/bin/activate
 # LSD a better ls.
 
 
+######
+# Krew - Kubectl plugins:
+sudo pacman -S krew
+kubectl krew install modify-secret
+
 
 ##########################################
 # NeoVim Plugins
