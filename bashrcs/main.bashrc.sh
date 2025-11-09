@@ -56,7 +56,12 @@ HISTFILESIZE=100000  # commands in history file.
 shopt -s histappend  # append to HISTFILE instead of overwriting.
 # Hack to merge history across terminals.
 # NOTE: a command has to be run in the terminal in order for them to sync.
-PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
+#
+# I actually don't like this ... I need to think of something else...
+# I get value out of having separate histories in my bash sessions.
+# The real reason why I wanted these merged is to search command history from +1days ago.
+# I think that I can solve this problem a different way.
+# PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
 
 ### Fuzzy Finder
 if [ -e /usr/share/fzf/key-bindings.bash ]; then
