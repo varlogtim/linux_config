@@ -19,6 +19,7 @@ vim.opt.rtp:prepend(lazypath)
 -- - Looking into treesitter settings:
 --   - incremental_selection: more configuring...
 --   - textobjects: the bindings do not work for selecting functions in visual mode.
+-- - Yank copies to clipboard, but also dw and similar does. Perhaps it shouldn't
 
 
 --
@@ -26,9 +27,10 @@ vim.opt.rtp:prepend(lazypath)
 --
     vim.opt.clipboard = "unnamedplus" -- Sync yanks with system clipboard
     vim.opt.number = true
-    vim.opt.tabstop = 4
-    vim.opt.shiftwidth = 4
     vim.opt.expandtab = true
+    vim.opt.tabstop = 4
+    vim.opt.softtabstop = 4
+    vim.opt.shiftwidth = 4
     vim.opt.smartindent = true
     vim.opt.termguicolors = true
     vim.opt.signcolumn = "yes:1"
@@ -77,6 +79,11 @@ vim.opt.rtp:prepend(lazypath)
     -- Try this also:
     -- lazy.nvim: { "folke/trouble.nvim", cmd = "Trouble" }
     -- vim.keymap.set('n', '<leader>gr', '<cmd>Trouble lsp_references<CR>', { desc = 'Find References' })
+
+
+    --
+    -- Show implementations???
+    --
 
     --
     -- Refactor
