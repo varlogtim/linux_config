@@ -145,34 +145,55 @@ require("lazy").setup({
 --
 
 -- LSP setup
-    local lspconfig = require("lspconfig")
 
     -- Python: Pyright for code completion, goto def, etc.
     -- TODO: Errors are indicated, but not displayed.
-    lspconfig.pyright.setup {
+
+    vim.lsp.config('pyright', {
+        cmd = { 'pyright' },  -- assuming it's in PATH; add full path if needed
+        filetypes = { 'python' },
+        root_dir = vim.fs.root(0, { 'pyproject.toml', 'setup.py', 'requirements.txt', '.git' }),
         settings = {
             python = {
                 analysis = {
                     autoSearchPaths = true,
                     diagnosticMode = "openFilesOnly",
                     useLibraryCodeForTypes = true,
-                    typeCheckingMode = "basic",
+                    typeCheckingMode = "basic",  -- or "strict", "off", etc.
                 },
             },
         },
-    }
-    -- Go: gopls for LSP and formatting
-    lspconfig.gopls.setup {
+    })
+
+    -- Go: gopls
+    vim.lsp.config('gopls', {
+        cmd = { 'gopls' },
+        filetypes = { 'go', 'gomod', 'gowork', 'gotmpl' },
+        root_dir = vim.fs.root(0, { 'go.work', 'go.mod', '.git' }),
+        settings = {
+            gopls = {
+                -- your extra settings if any
+            },
+        },
+        -- on_attach moved here (or use LspAttach autocmd globally)
+        on_attach = function(client, bufnr)
+            client.server_capabilities.documentFormattingProvider = true
+            -- add any other on_attach stuff (keymaps, etc.)
+        end,
+    })
+
+    -- TypeScript/JS/React: ts_ls (was tsserver)
+    vim.lsp.config('ts_ls', {
+        cmd = { 'typescript-language-server', '--stdio' },
+        filetypes = { 'javascript', 'javascriptreact', 'javascript.jsx', 'typescript', 'typescriptreact', 'typescript.tsx' },
+        root_dir = vim.fs.root(0, { 'tsconfig.json', 'package.json', '.git' }),
         on_attach = function(client, bufnr)
             client.server_capabilities.documentFormattingProvider = true
         end,
-    }
-    -- TypeScript/JS/React: ts_ls for LSP and formatting
-    lspconfig.ts_ls.setup {
-        on_attach = function(client, bufnr)
-            client.server_capabilities.documentFormattingProvider = true
-        end,
-    }
+    })
+
+    -- Enable them all (this sets up FileType autocommands to start when you open matching files)
+    vim.lsp.enable({'pyright', 'gopls', 'ts_ls'})
 
 -- Lspsaga UI setup
 require("lspsaga").setup({
@@ -223,26 +244,6 @@ cmp.setup({
     sources = {
         { name = "nvim_lsp" },
         { name = "luasnip" },
-    },
-})
-
--- Treesitter Setup
-require("nvim-treesitter.configs").setup({
-    ensure_installed = { "python", "go", "typescript", "javascript", "tsx", "lua" },
-    highlight = {
-        enable = true,
-        additional_vim_regex_highlighting = false,
-    },
-    incremental_selection = { enable = true },
-    textobjects = {
-        select = {
-            enable = true,
-            lookahead = true,
-            keymaps = {
-                ["af"] = "@function.outer",
-                ["if"] = "@function.inner",
-            },
-        },
     },
 })
 
