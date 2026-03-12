@@ -1,0 +1,9 @@
+sudo apt install \
+   sway alacritty neovim waybar lsd git \
+   direnv make python3-pip python3.12-venv \
+   pipewire slurp \
+   -y
+
+
+Sound is borked...
+

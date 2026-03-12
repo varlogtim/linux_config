@@ -7,6 +7,7 @@ LSD_DIR := $(HOME)/.config/lsd
 all: lsd-installed config-install
 
 get-deps:
+	# TODO: perhaps all of these dependencies should call some parent level script which acquires these.
 	sudo pacman -S lsd
 
 lsd-installed:

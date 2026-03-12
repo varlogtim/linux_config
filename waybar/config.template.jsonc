@@ -13,9 +13,10 @@
     ],
     "modules-center": [],
     "modules-right": [
-        "mpd", // not sure what this does
+        "mpd", // not sure what this does...
         "clock",
-        "privacy"  // not sure what this does.
+        "privacy",  // not sure what this does. I think this is whether they are accessing my video/microphone.
+        "tray"
     ],
     // Modules configuration
     // "sway/workspaces": {
@@ -36,6 +37,10 @@
     // },
     "sway/mode": {
         "format": "<span style=\"italic\">{}</span>"
+    },
+    "tray": {
+        "icon-size": 21,
+        "spacing": 10
     },
     "mpd": {
         "format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {album} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S}) ⸨{songPosition}|{queueLength}⸩ {volume}% ",

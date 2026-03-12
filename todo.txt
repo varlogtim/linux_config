@@ -24,3 +24,8 @@ Git:
     - The "added" color is dark.
     - ^ Need to figure out how to flip these.
 ^ this was done in last commit by adjusting the terminal colors.
+
+
+SSH Config:
+ - You need to populate ~/.ssh/config
+ - You need to make a Makefile which populates this ... also ... mkdir ~/.ssh/control_masters/

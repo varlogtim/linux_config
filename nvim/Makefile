@@ -2,6 +2,7 @@
 
 NVIM_DIR := $(HOME)/.config/nvim
 NVIM_THEME_DIR := $(NVIM_DIR)/colors
+NVIM_PLUGIN_DIR := $(NVIM_DIR)/lua/plugins
 
 # Phony Targets
 .PHONY: all nvim-installed config-install get-deps
@@ -13,7 +14,8 @@ get-deps: check-venv
 	# I don't like global python, npm, and golang things being installed.
 	# Perhaps I should create a story about creating a global versions of these.
 	# I also don't remember exactly which of these was required.
-	sudo pacman -S pyright
+	#sudo pacman -S pyright
+	pip install pyright  # shit, I think I need this globally
 	#pip install python-lsp-server[all]
 	#pip install neovim-remote
 	#go install golang.org/x/tools/gopls@latest
@@ -31,7 +33,7 @@ check-venv:
 		exit 1; \
 	fi
 
-config-install: $(NVIM_THEME_DIR)/chromat.lua $(NVIM_DIR)/init.lua
+config-install: $(NVIM_THEME_DIR)/chromat.lua $(NVIM_DIR)/init.lua $(NVIM_PLUGIN_DIR)/treesitter.lua
 
 # Targets:
 # TODO: technically the init.lua build should depend on the theme building.
@@ -52,6 +54,12 @@ $(NVIM_THEME_DIR):
 
 $(NVIM_THEME_DIR)/chromat.lua: $(NVIM_THEME_DIR) build/chromat.lua
 	@cp -v build/chromat.lua $(NVIM_THEME_DIR)
+
+$(NVIM_PLUGIN_DIR):
+	@mkdir -p $(NVIM_PLUGIN_DIR)
+
+$(NVIM_PLUGIN_DIR)/treesitter.lua: $(NVIM_PLUGIN_DIR)
+	@cp -v plugins/treesitter.lua $(NVIM_PLUGIN_DIR)/treesitter.lua
 
 build/chromat.lua: check-venv ./build
 	@python3 gen_chromat_theme.py
