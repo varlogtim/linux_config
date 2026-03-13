@@ -1,9 +1,87 @@
 sudo apt install \
-   sway alacritty neovim waybar lsd git \
-   direnv make python3-pip python3.12-venv \
-   pipewire slurp \
-   -y
+    sway alacritty neovim waybar lsd git \
+    direnv make python3-pip python3.12-venv \
+    pipewire slurp \
+    mesa-utils vulkan-tools radeontop vainfo \
+    -y
+
+sudo apt install \
+    flatpak \
+    pulseaudio-utils pulsemixer \
+    wl-clipboard cliphist wofi grim \
+    obs-studio \
+    -y
+
 
 
 Sound is borked...
+
+
+
+# Video pull shit...
+
+## eglCreateContext crap:
+
+sudo apt install --reinstall libdrm-common libdrm-amdgpu1 libdrm2 y
+
+
+
+## Latest drivers
+
+(0)[tim@hpe ~]$ sudo add-apt-repository ppa:kisak/kisak-mesa && sudo apt update && sudo apt upgrade
+PPA publishes dbgsym, you may need to include 'main/debug' component
+Repository: 'Types: deb
+URIs: https://ppa.launchpadcontent.net/kisak/kisak-mesa/ubuntu/
+Suites: noble
+Components: main
+'
+Description:
+The goal of this PPA is to provide the latest point release of Mesa plus select non-invasive early backports. Deviations from upstream packages are listed on the package details page.
+
+--- Support status ---
+
+Bionic (18.04), Focal (20.04), Jammy (22.04) - Discontinued - Long term users can use kisak-mesa stable
+Noble (24.04) - Supported
+Plucky (25.04) - End of Life - Removal after 4 weeks (2026-03-08)
+Questing (25.10) - Preliminary support (Not tested locally)
+
+Note: Please report any issues to mesa. ARM builds are not tested locally.
+
+--- Is this PPA stable? ---
+
+Short answer: Mostly.
+
+Long answer: Compared to bleeding edge mesa PPAs, there is a much lower chance of complications, but as Ubuntu LTS releases age, the odds of unexpected interactions between older kernels / compilers / X increases with each major release. Anomalies are inevitable the further the host system gets from the configuration active mesa developers use on a daily basis. If you value stability over support, https://launchpad.net/~kisak/+archive/ubuntu/turtle/ is available as an alternative.
+
+In the event that there is a major issue with new mesa on an older Ubuntu LTS and the mesa devs are not interested in triaging the issue, then the Ubuntu LTS release will be dropped from this PPA and the last release pushed to kisak-mesa stable will be frozen.
+
+--- Package status ---
+
+llvm - Updating as needed for mesa
+mesa - Following latest point release
+libdrm - Updating as needed for mesa
+
+Mesa 26.0 Note:
+
+Upstream mesa packaging has merged mesa-va-drivers into mesa-libgallium and removed mesa-va-drivers. This triggers a warning during routine updates which should be resolvable with a partial upgrade by GUI tools or by manually nudging mesa in a terminal with the following:
+
+sudo apt install libgl1-mesa-dri libgl1-mesa-dri:i386
+
+--- Removal ---
+
+It's strongly recommended to remove this PPA before upgrading to a newer Ubuntu release or using another mesa PPA.
+
+sudo apt install ppa-purge
+sudo ppa-purge ppa:kisak/kisak-mesa
+
+Note: Using ppa-purge with Ubuntu derivatives needs to include -d <based_on_name> to work safely. For example, Linux Mint 20 is based on Ubuntu Focal, so that would make it:
+
+sudo ppa-purge -d focal ppa:kisak/kisak-mesa
+
+--- Donations ---
+
+I can't accept donations and any random donation site account is a scam. If you have some extra money burning a hole in your pocket, please consider sending it to a charity of your choice (for the poors, animals, whatever else you may think it might need it), then send Oibaf a note that I stole the suggestion from his PPA.
+More info: https://launchpad.net/~kisak/+archive/ubuntu/kisak-mesa
+Adding repository.
+Press [ENTER] to continue or Ctrl-c to cancel.
 

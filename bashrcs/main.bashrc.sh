@@ -73,8 +73,23 @@ fi
 
 ### Direnv
 if [ -x "$(command -v direnv)" ]; then
-    eval "$(direnv hook bash)"
+    eval "$(direnv hook bash)"  # hack to only eval the _direnv_hook() functions
 fi
+
+### Title and direnv hook reset.
+# There is an issue with a semi colon being printed trying to single line multiple PROMPT_COMMAND functions.
+# Therefore, we need to make a single function.
+# TODO: this crap doesn't work ... fix later.
+update_title() {
+    echo -ne "\033]0;${USER}@${HOSTNAME}:${PWD}\0007;"
+}
+
+prompt_wrapper() {
+    _direnv_hook
+    update_title
+}
+
+PROMPT_COMMAND=prompt_wrapper
 
 ### Git Config (TODO: look into a better way of setting that or isolating thise)
 git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
