@@ -5,3 +5,5 @@ Yo, you need to make a Makefile which does the following:
 3.
 
 yeah.
+
+Need to install fzf too.

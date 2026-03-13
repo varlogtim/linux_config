@@ -51,6 +51,7 @@ white = "#d7d7af"
 cursor = "#af005f"
 
 [window]
+dynamic_title = true
 padding.x = 3
 padding.y = 2
 

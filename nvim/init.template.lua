@@ -33,6 +33,9 @@ vim.opt.rtp:prepend(lazypath)
     vim.opt.shiftwidth = 4
     vim.opt.smartindent = true
     vim.opt.termguicolors = true
+    vim.opt.title = true
+    --vim.opt.titlestring = '%{system("whoami")[:-2]}@%{hostname()}: nvim: %{fnamemodify(getcwd(), ":~"}: %f'
+    --^ the default is actually pretty good. Might want to modify it in the future.
     vim.opt.signcolumn = "yes:1"
     vim.opt.spell = true
     vim.opt.spelllang = "en_us"
