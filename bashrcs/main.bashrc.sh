@@ -64,11 +64,26 @@ shopt -s histappend  # append to HISTFILE instead of overwriting.
 # PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
 
 ### Fuzzy Finder
+# TODO: clean this up
 if [ -e /usr/share/fzf/key-bindings.bash ]; then
     source /usr/share/fzf/key-bindings.bash
+else
+    # Ubuntu path
+    if [ -e /usr/share/doc/fzf/examples/key-bindings.bash ]; then
+        source /usr/share/doc/fzf/examples/key-bindings.bash
+    else
+        echo "Couldn't find fzf bash key-bindings"
+    fi
 fi
 if [ -e /usr/share/fzf/completion.bash ]; then
     source /usr/share/fzf/completion.bash
+else
+    # Ubuntu path
+    if [ -e /usr/share/bash-completion/completions/fzf ]; then
+        source /usr/share/bash-completion/completions/fzf
+    else
+        echo "Couldn't find fzf bash completions"
+    fi
 fi
 
 ### Direnv
