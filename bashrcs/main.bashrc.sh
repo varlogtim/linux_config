@@ -102,6 +102,8 @@ update_title() {
 prompt_wrapper() {
     _direnv_hook
     update_title
+    date -R
+    echo
 }
 
 PROMPT_COMMAND=prompt_wrapper
