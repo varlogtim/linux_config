@@ -1,11 +1,16 @@
 .DEFAULT_GLOBAL := config-install
 
 SWAY_DIR := $(HOME)/.config/sway
+SCREENSHOT_DIR := $(HOME)/screenshots
 
 
 # Phony Targets
 .PHONY: all sway-installed config-install get-deps
 all: sway-installed get-deps config-install
+
+
+$(SCREENSHOT_DIR):
+	@mkdir -p $(SCREENSHOT_DIR)
 
 get-deps: check-venv
 	@pip install -r requirements.txt
@@ -22,14 +27,14 @@ check-venv:
 		exit 1; \
 	fi
 
-config-install: $(SWAY_DIR)/config
+config-install: $(SCREENSHOT_DIR) $(SWAY_DIR)/config
 
 # Targets:
 ./build:
 	@mkdir -p ./build/
 
 build/config: check-venv ./build
-	@python3 gen_config.py
+	@python3 gen_config.py --screenshot-dir $(SCREENSHOT_DIR)
 
 $(SWAY_DIR):
 	@mkdir -p $(SWAY_DIR)
