@@ -40,4 +40,5 @@ $(SWAY_DIR):
 	@mkdir -p $(SWAY_DIR)
 
 $(SWAY_DIR)/config: $(SWAY_DIR) build/config
+	make -C icons configure-cursor-theme
 	@cp -v build/config $(SWAY_DIR)
