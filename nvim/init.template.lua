@@ -46,7 +46,7 @@ vim.opt.rtp:prepend(lazypath)
 --
 
 --
--- Code Navigation
+-- Code Navigation / LSP Config
 --
     -- TODO:
     -- I tried a lot of these in Python, need to try Golang, Typescript and others.
@@ -84,7 +84,9 @@ vim.opt.rtp:prepend(lazypath)
     -- vim.keymap.set('n', '<leader>gr', '<cmd>Trouble lsp_references<CR>', { desc = 'Find References' })
 
 
-    --
+    -- Signature help (manual trigger)
+    vim.keymap.set('n', '<leader>h', vim.lsp.buf.signature_help, { desc = 'LSP Signature Help' })
+    
     -- Show implementations???
     --
 
@@ -194,6 +196,13 @@ require("lazy").setup({
             client.server_capabilities.documentFormattingProvider = true
         end,
     })
+
+    vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
+        vim.lsp.handlers.signature_help, {
+          border = "rounded",
+          focusable = false,
+        }
+    )
 
     -- Enable them all (this sets up FileType autocommands to start when you open matching files)
     vim.lsp.enable({'pyright', 'gopls', 'ts_ls'})
