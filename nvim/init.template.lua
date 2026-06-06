@@ -166,6 +166,8 @@ require("lazy").setup({
             })
         end,
     },
+
+    -- LazyGit, CLI GUI-esque Git interface
     {
         "kdheepak/lazygit.nvim",
         dependencies = { "nvim-lua/plenary.nvim" },
@@ -173,6 +175,10 @@ require("lazy").setup({
             vim.keymap.set("n", "<leader>gs", ":LazyGit<cr>", { desc = "Git Status (popup)" })
         end,
     },
+
+    -- TODO: explore Fugitive ... it is more "native" ... but ... don't want to learning curve that right now.
+    -- { "tpope/vim-fugitive" },
+    -- See comment below with key bindings.
 }, {
     performance = {
         rtp = {
@@ -180,6 +186,17 @@ require("lazy").setup({
         },
     },
 }) -- end lazy setup
+
+
+-- Fugitive key binds - NOT USED RIGHT NOW.
+-- vim.keymap.set("n", "<leader>gs", ":Git<cr>", { desc = "Git status (fugitive)" })
+-- vim.keymap.set("n", "<leader>ga", ":Git add %<cr>", { desc = "Stage current file" })
+-- vim.keymap.set("n", "<leader>gA", ":Git add .<cr>", { desc = "Stage all" })
+-- vim.keymap.set("n", "<leader>gc", ":Git commit<cr>", { desc = "Commit" })
+-- vim.keymap.set("n", "<leader>gC", ":Git commit --amend<cr>", { desc = "Amend commit" })
+-- vim.keymap.set("n", "<leader>gp", ":Git push<cr>", { desc = "Push" })
+-- vim.keymap.set("n", "<leader>gl", ":Git log --oneline<cr>", { desc = "Log" })
+-- vim.keymap.set("n", "<leader>gd", ":Gdiffsplit<cr>", { desc = "Diff current file" })
 
 --
 -- Colors for Git Signs
