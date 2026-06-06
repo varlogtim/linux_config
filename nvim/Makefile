@@ -3,12 +3,13 @@
 NVIM_DIR := $(HOME)/.config/nvim
 NVIM_THEME_DIR := $(NVIM_DIR)/colors
 NVIM_PLUGIN_DIR := $(NVIM_DIR)/lua/plugins
+BIN_DIR := $(HOME)/bin
 
 # Phony Targets
 .PHONY: all nvim-installed config-install get-deps
 all: nvim-installed get-deps config-install
 
-get-deps: check-venv
+get-deps: check-venv install-lazygit
 	@pip install -r requirements.txt
 	# TODO: Should look at these requirements
 	# I don't like global python, npm, and golang things being installed.
@@ -20,6 +21,20 @@ get-deps: check-venv
 	#pip install neovim-remote
 	#go install golang.org/x/tools/gopls@latest
 	#npm install -g typescript-language-server eslint prettier
+
+install-lazygit: $(BIN_DIR)/lazygit
+
+$(BIN_DIR):
+	@mkdir -p $(BIN_DIR)
+
+$(BIN_DIR)/lazygit: $(BIN_DIR)
+	@echo "Installing latest lazygit to $(BIN_DIR)..."
+	@LAZYGIT_VERSION=$$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | grep -Po '"tag_name": "v\K[^"]*'); \
+	curl -Lo /tmp/lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_$${LAZYGIT_VERSION}_Linux_x86_64.tar.gz"; \
+	tar xf /tmp/lazygit.tar.gz -C $(BIN_DIR) lazygit; \
+	chmod +x $(BIN_DIR)/lazygit; \
+	rm -f /tmp/lazygit.tar.gz; \
+	echo "lazygit installed successfully to $(BIN_DIR)/lazygit"
 
 nvim-installed:
 	@if ! command -v nvim > /dev/null; then \

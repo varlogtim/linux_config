@@ -39,7 +39,7 @@ vim.opt.rtp:prepend(lazypath)
     vim.opt.signcolumn = "yes:1"
     vim.opt.spell = true
     vim.opt.spelllang = "en_us"
-    vim.keymap.set('n', '<leader>h', ':noh<CR>', { desc = "Remove highting after search" })
+    vim.keymap.set('n', '<leader><BS>', ':noh<CR>', { desc = "Remove highting after search" })
 
 -- Operations:
 -- - Expanding setting correct tab width: select text in vision mode, the hit =, bam!
@@ -48,8 +48,6 @@ vim.opt.rtp:prepend(lazypath)
 --
 -- Code Navigation / LSP Config
 --
-    -- TODO:
-    -- I tried a lot of these in Python, need to try Golang, Typescript and others.
     vim.g.mapleader = " "
     vim.g.maplocalleader = " "
 
@@ -85,10 +83,11 @@ vim.opt.rtp:prepend(lazypath)
 
 
     -- Signature help (manual trigger)
-    vim.keymap.set('n', '<leader>h', vim.lsp.buf.signature_help, { desc = 'LSP Signature Help' })
+    -- TODO: the UX for this kind of sucks.
+    vim.keymap.set('n', '<leader>p', vim.lsp.buf.signature_help, { desc = 'LSP Signature Help' })
     
     -- Show implementations???
-    --
+    -- TODO: figure out the LSP command for this.
 
     --
     -- Refactor
@@ -136,6 +135,44 @@ require("lazy").setup({
         dependencies = { "nvim-tree/nvim-web-devicons" },  -- Optional for icons
         opts = {},
     },
+
+    -- Git signs and hunk management
+    {
+        "lewis6991/gitsigns.nvim",
+        config = function()
+            require("gitsigns").setup({
+                signs = {
+                    add          = { text = "", hl = "GitSignsAdd" },
+                    change       = { text = "", hl = "GitSignsChange" },
+                    delete       = { text = "", hl = "GitSignsDelete" },
+                    topdelete    = { text = "‾", hl = "GitSignsDelete" },
+                    changedelete = { text = "", hl = "GitSignsChange" },
+                    untracked    = { text = "┆", hl = "GitSignsUntracked" },
+                },
+                signs_staged = {
+                    add          = { text = "", hl = "GitSignsStagedAdd" },
+                    change       = { text = "", hl = "GitSignsStagedChange" },
+                    delete       = { text = "󰍵", hl = "GitSignsStagedDelete" },
+                    topdelete    = { text = "‾", hl = "GitSignsStagedDelete" },
+                    changedelete = { text = "~", hl = "GitSignsStagedChange" },
+                },  
+                signs_staged_enable = true, -- important: enables the staged signs
+                current_line_blame = false, -- set to true if you like inline blame
+                current_line_blame_opts = {
+                    virt_text = true,
+                    virt_text_pos = "eol",
+                    delay = 300,
+                },
+            })
+        end,
+    },
+    {
+        "kdheepak/lazygit.nvim",
+        dependencies = { "nvim-lua/plenary.nvim" },
+        config = function()
+            vim.keymap.set("n", "<leader>gs", ":LazyGit<cr>", { desc = "Git Status (popup)" })
+        end,
+    },
 }, {
     performance = {
         rtp = {
@@ -143,6 +180,14 @@ require("lazy").setup({
         },
     },
 }) -- end lazy setup
+
+--
+-- Colors for Git Signs
+--
+-- TODO: Make staged signs more distinct...
+-- vim.api.nvim_set_hl(0, "GitSignsStagedAdd",    { fg = "#5f875f", bold = true })
+-- vim.api.nvim_set_hl(0, "GitSignsStagedChange", { fg = "#5f5f87", bold = true })
+-- vim.api.nvim_set_hl(0, "GitSignsStagedDelete", { fg = "#875f5f", bold = true })
 
 
 --
@@ -286,13 +331,69 @@ vim.api.nvim_create_autocmd("VimResized", {
 -- Fuzzy Finder
 --
 local fzf = require('fzf-lua')
+
+--
+-- UX Keybindings
+--
+
 -- Search files in this directory
 vim.keymap.set('n', '<C-p>', fzf.files, { desc = "FzfLua: Find Files" })
+
 -- Live grep across files (uses ripgrep, maybe)
 vim.keymap.set('n', '<leader>fg', fzf.live_grep, { desc = "FzfLua: Live Grep" })
 vim.keymap.set('n', '<leader>fb', fzf.buffers, { desc = "FzfLua: Buffers" })
 vim.keymap.set('n', '<leader>fh', fzf.helptags, { desc = "FzfLua: Help Tags" })
+
+-- Display diagnostics in current file. I.e., if you have errors.
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = "Open diagnostics list" })
+
+
+-- Gitsigns keymaps
+local gitsigns = require("gitsigns")
+
+-- A "hunk" is a contiguous block of change in a file.
+-- OK, the set({"n", "v"}, ...) is Normal and Visual mode.
+vim.keymap.set({"n", "v"}, "<C-s>", gitsigns.stage_hunk, { desc = "Stage hunk" }) -- git add hunk
+vim.keymap.set({"n", "v"}, "<leader>hr", gitsigns.reset_hunk, { desc = "Reset hunk" }) -- git restore --staged hunk
+vim.keymap.set({"n", "v"}, "<leader>hu", gitsigns.undo_stage_hunk, { desc = "Unstage hunk" })
+vim.keymap.set({"n", "v"}, "<leader>hp", gitsigns.preview_hunk, { desc = "Preview hunk" }) -- show the changes in a floating window.
+vim.keymap.set({"n", "v"}, "<leader>hb", function() gitsigns.blame_line({ full = true }) end, { desc = "Blame line" }) -- show git blame
+-- so... the UX here for refactor of a local function signature:
+-- 1. Make some change to the function signature.
+-- 2. Find references in file, change sig there.
+-- 3. Repeat.
+-- 4. Now I can use ctrl+j and ctrl+k to navigate around and see my changes.
+-- 5. I can use space+hd, and see a diff.
+-- 6. Now I can use ctrl+j and ctrl+s, to stage that hunk.
+-- 7. repeat.
+-- 8. Oops, I messed up, now I can space+hu, to undo the stage. (actually, just staging again seems to unstage... don't really understand")
+-- 9. Shoot, I don't even wanna do any of this ... space+hr, reset hunk.
+
+-- Git diff
+vim.keymap.set({"n", "v"}, "<leader>hd", gitsigns.diffthis, { desc = "Diff this" }) -- show the changes in file compared to staged changes.
+-- Close diff view easily
+vim.keymap.set("n", "<leader>hq", function()
+    if vim.wo.diff then
+        vim.cmd("wincmd h")
+        vim.cmd("q")
+    else
+        vim.cmd("q")
+    end
+end, { desc = "Close diff view" })
+
+-- Navigation
+vim.keymap.set("n", "<C-j>", function()
+    if vim.wo.diff then return "<C-j>" end
+    vim.schedule(function() gitsigns.next_hunk({ target = "all" }) end)
+    return "<Ignore>"
+end, { expr = true, desc = "Next hunk" })
+
+vim.keymap.set("n", "<C-k>", function()
+    if vim.wo.diff then return "<C-k>" end
+    vim.schedule(function() gitsigns.prev_hunk({ target = "all" }) end)
+    return "<Ignore>"
+end, { expr = true, desc = "Prev hunk" })
+
 
 ------------------------------------------
 -- Lualine Setup
