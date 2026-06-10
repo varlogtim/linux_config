@@ -86,8 +86,13 @@ vim.opt.rtp:prepend(lazypath)
     -- TODO: the UX for this kind of sucks.
     vim.keymap.set('n', '<leader>p', vim.lsp.buf.signature_help, { desc = 'LSP Signature Help' })
     
-    -- Show implementations???
-    -- TODO: figure out the LSP command for this.
+    --
+    -- Show implementations...
+    --
+    vim.keymap.set('n', '<leader>i', vim.lsp.buf.implementation, {
+        buffer = bufnr,
+        desc = 'LSP: Go to Implementation'
+    })
 
     --
     -- Refactor
