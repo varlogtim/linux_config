@@ -36,3 +36,37 @@ PS1+='\[\e[38;5;15m\] \w'      # Directory
 PS1+='\[\e[38;5;11m\]]'        # Closing square bracket
 PS1+='\[\e[38;5;9m\]\$'        # $
 PS1+='\[\e[0m\] '              # Reset color to default
+
+
+# Problem solve: easily change terminal prompt on the fly to add visual indicator 
+# of the terminal containing env vars I am currently working on...
+#
+# TODO: in the future, I should probably add more functions for pushing env vars into a list.
+# ... then making that list globally sourcable.
+#
+# UX:
+# 1. pushps1 CoolThing
+# 2. Do work on cool thing, maybe set some env vars, etc...
+# 3. popps1
+# ... prompt returns.
+#
+#
+
+declare -a _PS1_STACK=()
+
+
+pushps1() {
+    _PS1_STACK+=("$PS1")
+    local prefix="$*"
+    PS1="${prefix}${PS1}"
+}
+
+popps1() {
+    if (( ${#_PS1_STACK[@]} > 0 )); then
+        PS1="${_PS1_STACK[-1]}"
+        unset '_PS1_STACK[-1]'
+    else
+        echo "ps1pop: PS1 stack is empty" >&2
+        return 1
+    fi
+}

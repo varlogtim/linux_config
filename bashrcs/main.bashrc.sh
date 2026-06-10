@@ -158,5 +158,3 @@ fi
 if [ -f "${BASHRC_DIR}/work.bashrc.sh" ]; then
     source "${BASHRC_DIR}/work.bashrc.sh"
 fi
-
-
