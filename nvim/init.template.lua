@@ -172,7 +172,7 @@ require("lazy").setup({
         end,
     },
 
-    -- LazyGit, CLI GUI-esque Git interface
+    -- LazyGit, TUI Git interface
     {
         "kdheepak/lazygit.nvim",
         dependencies = { "nvim-lua/plenary.nvim" },
@@ -184,6 +184,44 @@ require("lazy").setup({
     -- TODO: explore Fugitive ... it is more "native" ... but ... don't want to learning curve that right now.
     -- { "tpope/vim-fugitive" },
     -- See comment below with key bindings.
+
+
+    -- GitHub Copilot (base plugin - required)
+    { "github/copilot.vim" },
+
+    -- Copilot Chat
+    {
+        "CopilotC-Nvim/CopilotChat.nvim",
+        dependencies = {
+            { "nvim-lua/plenary.nvim", branch = "master" },
+        },
+        build = "make tiktoken", -- improves token counting
+        opts = {
+            model = 'claude-opus-4.8',
+            temperature = 0.2,
+            trusted_tools = nil,  -- TODO, look at this later.
+            auto_insert_mode = true,
+            window = {
+              layout = 'vertical', -- float, vertical, horizontal
+              width = 0.33, -- whole numbers are fixed width in columns, decimals are percentage of screen.
+              -- TODO: Initially, chat is 33%, code 66%, when I open a new vertial window, we have chat 33, code1 33, code2 33
+              --       when I close one of the code windows, it becomes 50/50. Likely an autocmd on vim window resize.
+              --height = 20,
+              -- border = 'rounded', -- 'single', 'double', 'rounded', 'solid'
+              -- title = '🤖 Clanking out...',
+              zindex = 100, -- Ensure window stays on top
+            },
+  
+            headers = {
+              user = '👤',
+              assistant = '🤖',
+              tool = '🔧',
+            },
+  
+            separator = '--',
+            auto_fold = true, -- Automatically folds non-assistant messages
+          },
+    },
 }, {
     performance = {
         rtp = {
@@ -216,7 +254,7 @@ require("lazy").setup({
 -- Plugin Configuration
 --
 
--- LSP setup
+    -- LSP setup
 
     -- Python: Pyright for code completion, goto def, etc.
     -- TODO: Errors are indicated, but not displayed.
@@ -274,38 +312,45 @@ require("lazy").setup({
     -- Enable them all (this sets up FileType autocommands to start when you open matching files)
     vim.lsp.enable({'pyright', 'gopls', 'ts_ls'})
 
--- Lspsaga UI setup
-require("lspsaga").setup({
-    ui = {
-        border = "rounded",
-        winblend = 10,
-    },
-    hover = {
-        max_width = 0.6,
-        max_height = 0.4,
-    },
-    diagnostic = {
-        on_insert = false, -- Prevent diagnostic popups during typing
-        show_code_action = true,
-        show_source = true,
-    },
-    outline = {
-        auto_preview = true,
-        auto_close = true,
-        keys = {
-            jump = '<Enter>',
-            toggle_or_jump = 'o',
+    --
+    -- Lspsaga UI setup
+    --
+    require("lspsaga").setup({
+        ui = {
+            border = "rounded",
+            winblend = 10,
         },
-    },
-    -- lightbulb = {
-    --     enable = true,
-    --     sign = true,
-    --     icon = 'g',
-    -- },
-    -- diagnostic = {
-    --     virtual_text = { prefix = 'd' },
-    -- }
-})
+        hover = {
+            max_width = 0.6,
+            max_height = 0.4,
+        },
+        diagnostic = {
+            on_insert = false, -- Prevent diagnostic popups during typing
+            show_code_action = true,
+            show_source = true,
+        },
+        outline = {
+            auto_preview = true,
+            auto_close = true,
+            keys = {
+                jump = '<Enter>',
+                toggle_or_jump = 'o',
+            },
+        },
+        -- lightbulb = {
+        --     enable = true,
+        --     sign = true,
+        --     icon = 'g',
+        -- },
+        -- diagnostic = {
+        --     virtual_text = { prefix = 'd' },
+        -- }
+    })
+
+
+--
+-- Auto commands
+--
 
 -- Autocompletion setup
 local cmp = require("cmp")
@@ -350,13 +395,13 @@ vim.api.nvim_create_autocmd("VimResized", {
 })
 
 --
+-- Key Mappings
+--
+
+--
 -- Fuzzy Finder
 --
 local fzf = require('fzf-lua')
-
---
--- UX Keybindings
---
 
 -- Search files in this directory
 vim.keymap.set('n', '<C-p>', fzf.files, { desc = "FzfLua: Find Files" })
@@ -370,7 +415,9 @@ vim.keymap.set('n', '<leader>fh', fzf.helptags, { desc = "FzfLua: Help Tags" })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = "Open diagnostics list" })
 
 
+--
 -- Gitsigns keymaps
+--
 local gitsigns = require("gitsigns")
 
 -- A "hunk" is a contiguous block of change in a file.
@@ -391,7 +438,9 @@ vim.keymap.set({"n", "v"}, "<leader>hb", function() gitsigns.blame_line({ full =
 -- 8. Oops, I messed up, now I can space+hu, to undo the stage. (actually, just staging again seems to unstage... don't really understand")
 -- 9. Shoot, I don't even wanna do any of this ... space+hr, reset hunk.
 
+--
 -- Git diff
+--
 vim.keymap.set({"n", "v"}, "<leader>hd", gitsigns.diffthis, { desc = "Diff this" }) -- show the changes in file compared to staged changes.
 -- Close diff view easily
 vim.keymap.set("n", "<leader>hq", function()
@@ -403,7 +452,9 @@ vim.keymap.set("n", "<leader>hq", function()
     end
 end, { desc = "Close diff view" })
 
+--
 -- Navigation
+--
 vim.keymap.set("n", "<C-j>", function()
     if vim.wo.diff then return "<C-j>" end
     vim.schedule(function() gitsigns.next_hunk({ target = "all" }) end)
@@ -415,6 +466,28 @@ vim.keymap.set("n", "<C-k>", function()
     vim.schedule(function() gitsigns.prev_hunk({ target = "all" }) end)
     return "<Ignore>"
 end, { expr = true, desc = "Prev hunk" })
+
+--
+-- Copilot Chat
+--
+
+-- Open Copilot Chat (right panel)
+vim.keymap.set("n", "<leader>cc", function()
+    require("CopilotChat").toggle({})
+end, { desc = "Toggle Copilot Chat (right panel)" })
+
+
+-- Quick chat with current selection or buffer
+vim.keymap.set({ "n", "v" }, "<leader>ca", function()
+    require("CopilotChat").ask(vim.fn.input("Ask Copilot: "))
+end, { desc = "Ask Copilot (quick)" })
+
+-- Chat with current buffer as context
+vim.keymap.set("n", "<leader>cb", function()
+    require("CopilotChat").chat({
+        context = { "buffer" },
+    })
+end, { desc = "Chat with current buffer" })
 
 
 ------------------------------------------
