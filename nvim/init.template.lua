@@ -219,7 +219,7 @@ require("lazy").setup({
             },
   
             separator = '--',
-            auto_fold = true, -- Automatically folds non-assistant messages
+            auto_fold = true,
           },
     },
 }, {
