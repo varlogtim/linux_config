@@ -219,7 +219,7 @@ require("lazy").setup({
             },
   
             separator = '--',
-            auto_fold = true,
+            auto_fold = false,
           },
     },
 }, {
@@ -394,6 +394,21 @@ vim.api.nvim_create_autocmd("VimResized", {
     end,
 })
 
+
+-- Fix autofold + clean up CopilotChat window
+vim.api.nvim_create_autocmd("BufEnter", {
+  pattern = "copilot-chat",
+  callback = function()
+    vim.opt_local.foldenable = false
+    vim.opt_local.foldmethod = "manual"
+    vim.opt_local.foldcolumn = "0"
+    vim.opt_local.relativenumber = false
+    vim.opt_local.number = false
+    vim.opt_local.conceallevel = 0
+    vim.opt_local.signcolumn = "no"
+  end,
+})
+
 --
 -- Key Mappings
 --
@@ -471,7 +486,7 @@ end, { expr = true, desc = "Prev hunk" })
 -- Copilot Chat
 --
 
--- Open Copilot Chat (right panel)
+-- Open Copilot Chat
 vim.keymap.set("n", "<leader>cc", function()
     require("CopilotChat").toggle({})
 end, { desc = "Toggle Copilot Chat (right panel)" })
@@ -484,7 +499,7 @@ end, { desc = "Ask Copilot (quick)" })
 
 -- Chat with current buffer as context
 vim.keymap.set("n", "<leader>cb", function()
-    require("CopilotChat").chat({
+    require("CopilotChat").open({
         context = { "buffer" },
     })
 end, { desc = "Chat with current buffer" })
