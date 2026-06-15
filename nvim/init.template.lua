@@ -487,7 +487,7 @@ end, { expr = true, desc = "Prev hunk" })
 --
 
 -- Open Copilot Chat
-vim.keymap.set("n", "<leader>cc", function()
+vim.keymap.set("n", "<leader>co", function()
     require("CopilotChat").toggle({})
 end, { desc = "Toggle Copilot Chat (right panel)" })
 
@@ -498,7 +498,7 @@ vim.keymap.set({ "n", "v" }, "<leader>ca", function()
 end, { desc = "Ask Copilot (quick)" })
 
 -- Chat with current buffer as context
-vim.keymap.set("n", "<leader>cb", function()
+vim.keymap.set({"n", "v"}, "<leader>cc", function()
     require("CopilotChat").open({
         context = { "buffer" },
     })
