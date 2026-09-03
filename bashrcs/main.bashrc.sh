@@ -94,9 +94,12 @@ fi
 ### Title and direnv hook reset.
 # There is an issue with a semi colon being printed trying to single line multiple PROMPT_COMMAND functions.
 # Therefore, we need to make a single function.
-# TODO: this crap doesn't work ... fix later.
+# This sets %title (the raw window title). Sway title_format (see
+# title.bashrc.sh / the `wt` command) then prepends any workstream label.
+# NOTE: use printf + a bare BEL (\007). The old form "\0007;" printed a stray
+# ';' into the title, which then leaked into Sway's %title.
 update_title() {
-    echo -ne "\033]0;${USER}@${HOSTNAME}:${PWD}\0007;"
+    printf '\033]0;%s@%s:%s\007' "${USER}" "${HOSTNAME}" "${PWD}"
 }
 
 prompt_wrapper() {
@@ -152,6 +155,11 @@ BASHRC_DIR=$(dirname "$(realpath "${BASH_SOURCE[0]}")")
 # Prompt
 if [ -f "${BASHRC_DIR}/prompt.bashrc.sh" ]; then
     source "${BASHRC_DIR}/prompt.bashrc.sh"
+fi
+
+# Per-terminal workstream titles (wt / pusht / popt)
+if [ -f "${BASHRC_DIR}/title.bashrc.sh" ]; then
+    source "${BASHRC_DIR}/title.bashrc.sh"
 fi
 
 # Work Aliases
