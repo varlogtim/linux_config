@@ -1,0 +1,7 @@
+[main]
+width=80
+lines=25
+font=Hack Nerd Font:size=18
+horizontal-pad=10
+vertical-pad=10
+inner-pad=8

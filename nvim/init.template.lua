@@ -217,9 +217,18 @@ require("lazy").setup({
               assistant = '🤖',
               tool = '🔧',
             },
-  
+
+            keymaps = {
+                close = 'q',
+                submit = '<C-Enter>',
+                toggle_input = '<C-Space>',
+                scroll_up = '<C-k>',
+                scroll_down = '<C-j>',
+            },
+
             separator = '--',
             auto_fold = false,
+            auto_scroll = true,
           },
     },
 }, {
