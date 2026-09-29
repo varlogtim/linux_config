@@ -14,6 +14,7 @@
     "modules-center": [],
     "modules-right": [
         "mpd", // not sure what this does...
+        "custom/dictator",
         "clock",
         "privacy",  // not sure what this does. I think this is whether they are accessing my video/microphone.
         "tray"
@@ -67,6 +68,30 @@
         },
         "tooltip-format": "MPD (connected)",
         "tooltip-format-disconnected": "MPD (disconnected)"
+    },
+    "custom/dictator": {
+        "exec": "dictator watch -format waybar",
+        "return-type": "json",
+        "restart-interval": 2,
+        // Every icon is prefixed with md-crown (U+F01A5) — because dictator — so
+        // the module is not mistaken for the privacy/pulseaudio mic icons next
+        // to it. Other prefix candidates:
+        // 󱌈 md-account_tie_voice, 󰼭 md-typewriter, 󰃦 md-bullhorn.
+        "format": "{icon}",
+        // Nerd Font glyphs (Material Design set, present in Hack Nerd Font):
+        // type=md-microphone notes=md-notebook_edit idle=md-microphone_off
+        // starting=md-timer_sand down=md-microphone_question
+        "format-icons": {
+            "type": "󰆥 󰍬",
+            "notes": "󰆥 󱓧",
+            "idle": "󰆥 󰍭",
+            "starting": "󰆥 󰔟",
+            "down": "󰆥 󱦉"
+        },
+        "escape": true,
+        "tooltip": true,
+        "on-click": "dictator -notify toggle type",
+        "on-click-right": "dictator -notify toggle notes"
     },
     "clock": {
         // "timezone": "America/New_York",
