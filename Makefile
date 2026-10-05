@@ -52,6 +52,7 @@ base:
 	# SSH keys and AWS stuffs.
 
 	# Git config
+	tools/git_set_global_config.sh
 
 	# Conda Env?
 	# conda env create -f miniconda3.env.py-3.7.11.yaml

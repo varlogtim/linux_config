@@ -112,10 +112,7 @@ prompt_wrapper() {
 
 PROMPT_COMMAND=prompt_wrapper
 
-### Git Config (TODO: look into a better way of setting that or isolating thise)
-git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
-git config --global alias lg-tag "log --color --graph  --tags --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
-git config --global core.editor "nvim"
+### Git Config: set once via tools/git_set_global_config.sh, not on every shell start.
 
 
 ##########################################
