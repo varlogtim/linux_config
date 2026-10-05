@@ -30,6 +30,7 @@ alias wlc='wl-copy'
 # TODO:
 # - Break specific components out into separate bashrc files and/or functions.
 # - Create a script which populates direnv files with specific versions of utils.
+#   (done for python: pyvenv.bashrc.sh / $PY_VENVS; still TODO for go/node/java)
 
 
 # Include paths
@@ -160,6 +161,11 @@ fi
 # Per-terminal workstream titles (wt / pusht / popt)
 if [ -f "${BASHRC_DIR}/title.bashrc.sh" ]; then
     source "${BASHRC_DIR}/title.bashrc.sh"
+fi
+
+# Python venvs outside the source tree ($PY_VENVS, pyvenv-create/use/adopt/ls)
+if [ -f "${BASHRC_DIR}/pyvenv.bashrc.sh" ]; then
+    source "${BASHRC_DIR}/pyvenv.bashrc.sh"
 fi
 
 # Work Aliases

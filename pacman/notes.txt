@@ -66,6 +66,12 @@ source .venv/bin/activate
 2. direnv allow
 3. Then changing in and out of the dir automatically loads/unloads the virtual env.
 
+# python venvs: don't do the above by hand any more. The venv lives in $PY_VENVS
+# (not in the repo, so git worktrees can share it) and the .envrc is generated:
+$ pyvenv-create            # new venv $PY_VENVS/py-3.12_<dirname> + .envrc + direnv allow
+$ pyvenv-use py-3.12_foo   # point this dir (e.g. a worktree) at an existing venv
+# see bashrcs/pyvenv.bashrc.sh
+
 
 # LSD a better ls.
 
