@@ -55,6 +55,18 @@ button:hover {
     background-color: #eb4d4b;
 }
 
+/* juggler's hidden parking lot is a workspace named "WS+". waybar names each
+   workspace button "sway-workspace-<name>"; with its format-icons entry empty
+   (see config.jsonc) zeroing the box here collapses the button to 0px. The
+   backslash escapes the "+" for the CSS identifier. */
+#workspaces button#sway-workspace-WS\+ {
+    min-width: 0;
+    padding: 0;
+    margin: 0;
+    border-width: 0;
+    box-shadow: none;
+}
+
 #pulseaudio {
     background-color: ${bg_color};
     color: ${fg_color};
@@ -283,8 +295,8 @@ label:focus {
     color: #ffffd7;
 }
 #custom-juggler.displayed {
-    background-color: #005fb3;
-    box-shadow: inset 0 -3px #0087ff;
+    background-color: ${gr4};
+    box-shadow: inset 0 -3px ${gr2};
 }
 #custom-juggler.displayed.away {
     background-color: #3f3f3f;
