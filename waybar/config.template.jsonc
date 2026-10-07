@@ -18,6 +18,7 @@
     "modules-right": [
         "mpd", // not sure what this does...
         "custom/dictator",
+        "custom/director",
         "clock",
         "privacy",  // not sure what this does. I think this is whether they are accessing my video/microphone.
         "tray"
@@ -112,6 +113,35 @@
         "tooltip": true,
         "on-click": "dictator -notify toggle type",
         "on-click-right": "dictator -notify toggle notes"
+    },
+    "custom/director": {
+        // `director watch` holds an obs-websocket connection and prints one
+        // JSON line per state change (plus a 1s tick while recording, for the
+        // timer). alt = state, text = " MM:SS" while recording/paused,
+        // class = [state, scene]. "down" = OBS not running.
+        "exec": "director watch --format waybar",
+        "return-type": "json",
+        "restart-interval": 2,
+        // Every icon is prefixed with md-movie_open (U+F0FCE, a clapperboard) —
+        // because director — mirroring dictator's crown.
+        "format": "{icon}{text}",
+        // Nerd Font glyphs (Material Design set, present in Hack Nerd Font):
+        // recording=md-record (U+F044A) paused=md-pause (U+F03E4)
+        // starting/stopping=md-timer_sand (U+F051F)
+        // idle=md-record_circle_outline (U+F0EC3) down=md-movie_open_off (U+F1703)
+        "format-icons": {
+            "recording": "󰿎 󰑊",
+            "paused": "󰿎 󰏤",
+            "starting": "󰿎 󰔟",
+            "stopping": "󰿎 󰔟",
+            "idle": "󰿎 󰻃",
+            "down": "󱜃"
+        },
+        "escape": true,
+        "tooltip": true,
+        "on-click": "director --notify toggle screen",
+        "on-click-right": "director --notify toggle pip",
+        "on-click-middle": "director --notify pause"
     },
     "clock": {
         // "timezone": "America/New_York",
