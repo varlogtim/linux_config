@@ -283,8 +283,8 @@ label:focus {
     color: #ffffd7;
 }
 #custom-juggler.displayed {
-    background-color: #005fb3;
-    box-shadow: inset 0 -3px #0087ff;
+    background-color: ${gr4};
+    box-shadow: inset 0 -3px ${gr2};
 }
 #custom-juggler.displayed.away {
     background-color: #3f3f3f;
