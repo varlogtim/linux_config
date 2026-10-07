@@ -295,3 +295,25 @@ label:focus {
     color: #9f9f9f;
 }
 
+/* director waybar module. Classes come from `director watch --format waybar`:
+   the state (recording | paused | starting | stopping | idle | down) plus the
+   OBS scene name (screen, pip, ...). Palette: brred / bryellow / brcyan from
+   the sway config; idle and down fade like dictator's. */
+#custom-director {
+    padding: 0 8px;
+}
+#custom-director.recording {
+    color: #d70000;   /* brred: the tally light */
+}
+#custom-director.paused {
+    color: #af8700;   /* bryellow */
+}
+#custom-director.starting, #custom-director.stopping {
+    color: #00afaf;   /* brcyan: OBS launching / picker up / finalizing */
+}
+#custom-director.idle {
+    opacity: 0.45;
+}
+#custom-director.down {
+    opacity: 0.25;    /* OBS not running; click to launch + record */
+}
