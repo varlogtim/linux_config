@@ -8,6 +8,9 @@
     // Choose the order of the modules
     "modules-left": [
         "sway/workspaces",
+        // juggler: the displayed workstream, left-aligned after the
+        // workspaces; the mode indicator sits to its right. Click = picker.
+        "custom/juggler",
         "sway/mode",
         "custom/media"
     ],
@@ -36,8 +39,25 @@
     //         "default": ""
     //     }
     // },
+    "sway/workspaces": {
+        // Workspaces are named "N:label" (see sway config); show only the label.
+        "format": "{name}"
+    },
     "sway/mode": {
         "format": "<span style=\"italic\">{}</span>"
+    },
+    "custom/juggler": {
+        // `jug watch` streams one JSON line per change (sway events + 2s tick).
+        // Classes: displayed | empty | noslot, plus "away" when the slot
+        // workspace is not the focused one.
+        "exec": "jug watch --format waybar",
+        "return-type": "json",
+        "restart-interval": 2,
+        "format": "{}",
+        "escape": true,
+        "tooltip": true,
+        "on-click": "jug pick",
+        "on-click-right": "jug toggle"
     },
     "tray": {
         "icon-size": 21,
