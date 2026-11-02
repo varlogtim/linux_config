@@ -41,8 +41,26 @@
     //     }
     // },
     "sway/workspaces": {
-        // Workspaces are named "N:label" (see sway config); show only the label.
-        "format": "{name}"
+        // Workspaces are plain numbers (see sway config); the glyph for each
+        // lives here. juggler renames the slot to "N:WS" at runtime, so the
+        // "WS" entry follows the slot wherever it is: waybar matches the full
+        // name, then the label after "N:", and falls back to the name itself,
+        // so 4/5/6/9 show as text without an entry.
+        // "WS+" is juggler's hidden parking lot: an empty icon plus the
+        // #sway-workspace-WS\+ rule in style.css collapse its button to 0px.
+        "format": "{icon}",
+        // Nerd Font glyphs (Octicons / Font Awesome, present in Hack Nerd Font):
+        // 1=oct-home (U+F46D) 2=oct-terminal (U+F489) 7=oct-globe (U+F484)
+        // 8=fa-calendar_days (U+F073) 0=oct-tools (U+F425) WS=oct-workflow (U+F52E)
+        "format-icons": {
+            "1": "",
+            "2": "",
+            "7": "",
+            "8": "",
+            "0": "",
+            "WS": "",
+            "WS+": ""
+        }
     },
     "sway/mode": {
         "format": "<span style=\"italic\">{}</span>"
